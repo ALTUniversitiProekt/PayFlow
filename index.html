@@ -1,68 +1,34 @@
 <!DOCTYPE html>
-
 <html lang="kk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#07070b">
-<meta name="description" content="ARUZHAN AI — қарым-қатынас пен диалогқа арналған интеллектуалды AI ассистент.">
-<title>ARUZHAN AI — Intelligent Conversation Assistant</title>
+<meta name="theme-color" content="#08080d">
+<title>ARUZHAN AI — Қарым-қатынасқа көмектесетін интеллектуалды AI</title>
 
+<!-- Lucide Icons -->
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
 /* =========================================================
-   ARUZHAN AI
-   PREMIUM AI CONVERSATION ASSISTANT
-   SINGLE FILE EDITION
+   ARUZHAN AI - ADVANCED SINGLE FILE SYSTEM
 ========================================================= */
-
 :root {
-    --bg: #07070b;
-    --bg-soft: #0b0b12;
-    --surface: rgba(255,255,255,.035);
-    --surface-hover: rgba(255,255,255,.06);
-    --surface-strong: rgba(16,16,25,.92);
-
-    --text: #f7f7fb;
-    --text-soft: #c8c8d5;
-    --muted: #858594;
-
+    --bg: #06060a;
+    --bg-secondary: #0d0d14;
+    --card: #12121c;
+    --card-hover: #191926;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-accent: rgba(155, 108, 255, 0.3);
+    --text: #f8f8fb;
+    --muted: #9494a3;
     --purple: #9b6cff;
-    --purple-light: #b89cff;
     --pink: #ec4899;
-    --blue: #6366f1;
-    --green: #34d399;
-
-    --border: rgba(255,255,255,.08);
-    --border-light: rgba(255,255,255,.12);
-
-    --gradient: linear-gradient(
-        135deg,
-        #8b5cf6 0%,
-        #9b6cff 45%,
-        #ec4899 100%
-    );
-
-    --gradient-soft: linear-gradient(
-        135deg,
-        rgba(139,92,246,.18),
-        rgba(236,72,153,.12)
-    );
-
-    --shadow: 0 30px 100px rgba(0,0,0,.45);
-
-    --radius-sm: 10px;
-    --radius-md: 16px;
-    --radius-lg: 24px;
-    --radius-xl: 32px;
-
-    --nav-height: 72px;
+    --blue: #3b82f6;
+    --gradient: linear-gradient(135deg, #8b5cf6, #ec4899);
+    --gradient-glow: linear-gradient(135deg, rgba(139, 92, 246, 0.4), rgba(236, 72, 153, 0.4));
+    --radius: 16px;
 }
-
-/* =========================================================
-   RESET
-========================================================= */
 
 * {
     margin: 0;
@@ -76,3505 +42,975 @@ html {
 
 body {
     min-height: 100vh;
-    overflow-x: hidden;
-
+    background: radial-gradient(circle at 10% 10%, rgba(139, 92, 246, 0.12), transparent 30%),
+                radial-gradient(circle at 90% 20%, rgba(236, 72, 153, 0.08), transparent 30%),
+                radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.05), transparent 40%),
+                var(--bg);
     color: var(--text);
-    background:
-        radial-gradient(
-            circle at 10% 5%,
-            rgba(139,92,246,.13),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 90% 15%,
-            rgba(236,72,153,.09),
-            transparent 26%
-        ),
-        radial-gradient(
-            circle at 50% 70%,
-            rgba(99,102,241,.05),
-            transparent 38%
-        ),
-        var(--bg);
-
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow-x: hidden;
     line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: -1;
-
-    background-image:
-        linear-gradient(
-            rgba(255,255,255,.012) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.012) 1px,
-            transparent 1px
-        );
-
-    background-size: 80px 80px;
-
-    mask-image: linear-gradient(
-        to bottom,
-        black,
-        transparent 80%
-    );
-}
-
-::selection {
-    color: white;
-    background: rgba(155,108,255,.45);
 }
 
 ::-webkit-scrollbar {
-    width: 7px;
+    width: 6px;
 }
-
 ::-webkit-scrollbar-track {
-    background: #07070b;
+    background: var(--bg);
 }
-
 ::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,.12);
-    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
 }
 
-button,
-textarea,
-input {
-    font: inherit;
-}
-
-button {
-    border: 0;
-}
-
-a {
-    color: inherit;
-}
-
-/* =========================================================
-   UTILITIES
-========================================================= */
-
-.container {
-    width: min(1180px, calc(100% - 48px));
-    margin-inline: auto;
-}
-
-.hidden {
-    display: none !important;
-}
-
-.no-scroll {
-    overflow: hidden;
-}
-
-/* =========================================================
-   NAVBAR
-========================================================= */
-
+/* NAVBAR */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
-
     width: 100%;
-    height: var(--nav-height);
-
+    height: 72px;
     z-index: 1000;
-
-    display: flex;
-    align-items: center;
-
-    background: rgba(7,7,11,.72);
-    border-bottom: 1px solid transparent;
-
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-
-    transition:
-        background .3s ease,
-        border-color .3s ease,
-        box-shadow .3s ease;
-}
-
-.navbar.scrolled {
-    background: rgba(7,7,11,.92);
-    border-color: var(--border);
-    box-shadow: 0 10px 40px rgba(0,0,0,.25);
-}
-
-.nav-inner {
-    width: min(1180px, calc(100% - 48px));
-    margin-inline: auto;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 6%;
+    background: rgba(8, 8, 13, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
 }
 
 .logo {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 12px;
-
-    color: white;
     text-decoration: none;
+    color: white;
 }
 
-.logo-mark {
-    position: relative;
-
-    width: 40px;
-    height: 40px;
-
-    display: grid;
-    place-items: center;
-
-    border-radius: 12px;
-
-    background: var(--gradient);
-
-    box-shadow:
-        0 8px 30px rgba(139,92,246,.25);
-
-    overflow: hidden;
-}
-
-.logo-mark::after {
-    content: "";
-
-    position: absolute;
-    inset: 1px;
-
-    border-radius: 11px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.18),
-            transparent
-        );
-}
-
-.logo-mark svg {
-    position: relative;
-    z-index: 2;
-}
-
-.logo-copy {
+.logo-icon {
+    width: 42px;
+    height: 42px;
     display: flex;
-    flex-direction: column;
-    gap: 1px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--gradient);
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+    color: white;
 }
 
-.logo-copy strong {
-    font-size: 14px;
-    font-weight: 750;
-    letter-spacing: .5px;
+.logo-text strong {
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    display: block;
 }
 
-.logo-copy span {
+.logo-text span {
     color: var(--muted);
-    font-size: 9px;
-    letter-spacing: .4px;
+    font-size: 10px;
 }
 
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 28px;
 }
 
 .nav-links a {
-    position: relative;
-
     color: var(--muted);
     text-decoration: none;
-
-    font-size: 12px;
-    font-weight: 550;
-
-    transition: color .2s ease;
-}
-
-.nav-links a::after {
-    content: "";
-
-    position: absolute;
-    left: 0;
-    bottom: -8px;
-
-    width: 0;
-    height: 1px;
-
-    background: var(--purple);
-
-    transition: width .25s ease;
+    font-size: 13px;
+    font-weight: 500;
+    transition: 0.2s;
 }
 
 .nav-links a:hover {
     color: white;
 }
 
-.nav-links a:hover::after {
-    width: 100%;
-}
-
-.nav-action {
-    display: inline-flex;
+.nav-button {
+    padding: 10px 20px;
+    border: 1px solid var(--border-accent);
+    border-radius: 10px;
+    background: rgba(155, 108, 255, 0.1);
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
     align-items: center;
     gap: 8px;
-
-    padding: 10px 15px;
-
-    color: white;
-    text-decoration: none;
-
-    font-size: 11px;
-    font-weight: 650;
-
-    border: 1px solid rgba(155,108,255,.28);
-    border-radius: 11px;
-
-    background:
-        rgba(155,108,255,.09);
-
-    transition:
-        transform .25s ease,
-        background .25s ease,
-        box-shadow .25s ease;
+    transition: 0.3s;
 }
 
-.nav-action:hover {
-    transform: translateY(-1px);
-
-    background:
-        rgba(155,108,255,.16);
-
-    box-shadow:
-        0 8px 30px rgba(139,92,246,.18);
+.nav-button:hover {
+    background: rgba(155, 108, 255, 0.25);
+    box-shadow: 0 0 15px rgba(155, 108, 255, 0.3);
 }
 
-.mobile-toggle {
-    display: none;
-
-    width: 40px;
-    height: 40px;
-
-    place-items: center;
-
-    color: white;
-
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 11px;
-
-    cursor: pointer;
-}
-
-/* =========================================================
-   MOBILE MENU
-========================================================= */
-
-.mobile-menu {
-    position: fixed;
-
-    top: var(--nav-height);
-    left: 16px;
-    right: 16px;
-
-    z-index: 999;
-
-    padding: 12px;
-
-    border:
-        1px solid var(--border);
-
-    border-radius: 18px;
-
-    background:
-        rgba(10,10,16,.96);
-
-    backdrop-filter:
-        blur(24px);
-
-    box-shadow:
-        var(--shadow);
-
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-
-    transition:
-        opacity .25s ease,
-        visibility .25s ease,
-        transform .25s ease;
-}
-
-.mobile-menu.open {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.mobile-menu a {
-    display: flex;
-    align-items: center;
-
-    padding: 13px 14px;
-
-    color: var(--text-soft);
-    text-decoration: none;
-
-    font-size: 13px;
-
-    border-radius: 10px;
-
-    transition:
-        background .2s ease,
-        color .2s ease;
-}
-
-.mobile-menu a:hover {
-    color: white;
-    background: var(--surface-hover);
-}
-
-/* =========================================================
-   HERO
-========================================================= */
-
+/* HERO SECTION */
 .hero {
-    position: relative;
-
     min-height: 100vh;
-
+    padding: 140px 6% 60px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-
-    padding:
-        calc(var(--nav-height) + 70px)
-        0
-        80px;
-
-    overflow: hidden;
-}
-
-.hero-orb {
-    position: absolute;
-
-    width: 500px;
-    height: 500px;
-
-    border-radius: 50%;
-
-    filter: blur(100px);
-
-    pointer-events: none;
-
-    opacity: .14;
-}
-
-.hero-orb.one {
-    top: 5%;
-    left: -15%;
-
-    background: var(--purple);
-}
-
-.hero-orb.two {
-    right: -15%;
-    bottom: 5%;
-
-    background: var(--pink);
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-
-    max-width: 850px;
-    margin-inline: auto;
-
     text-align: center;
 }
 
-.hero-badge {
+.badge {
     display: inline-flex;
     align-items: center;
-    gap: 9px;
-
-    padding: 7px 13px;
-
-    margin-bottom: 25px;
-
-    color: #d8c9ff;
-
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .8px;
-
-    border:
-        1px solid rgba(155,108,255,.28);
-
-    border-radius: 100px;
-
-    background:
-        rgba(155,108,255,.07);
-
-    animation:
-        fadeUp .8s ease both;
+    gap: 8px;
+    padding: 6px 16px;
+    border: 1px solid var(--border-accent);
+    border-radius: 50px;
+    background: rgba(155, 108, 255, 0.08);
+    color: #c4aaff;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 24px;
 }
 
-.status-dot {
-    width: 7px;
-    height: 7px;
-
+.badge-dot {
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-
-    background: var(--green);
-
-    box-shadow:
-        0 0 12px rgba(52,211,153,.7);
+    background: var(--pink);
+    box-shadow: 0 0 10px var(--pink);
 }
 
 .hero h1 {
     max-width: 900px;
-
-    margin-inline: auto;
-    margin-bottom: 25px;
-
-    font-size:
-        clamp(42px, 7vw, 82px);
-
-    line-height: 1.03;
-
-    letter-spacing: -3.5px;
-
-    font-weight: 780;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffffff 10%,
-            #ddd6fe 52%,
-            #f9a8d4 100%
-        );
-
+    font-size: clamp(38px, 6vw, 72px);
+    line-height: 1.1;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #ffffff 30%, #c4b5fd 70%, #f9a8d4 100%);
     -webkit-background-clip: text;
-    background-clip: text;
-
     -webkit-text-fill-color: transparent;
-
-    animation:
-        fadeUp .8s .1s ease both;
 }
 
-.hero-description {
-    max-width: 650px;
-
-    margin-inline: auto;
-    margin-bottom: 35px;
-
+.hero p {
+    max-width: 620px;
     color: var(--muted);
-
-    font-size: 15px;
-    line-height: 1.8;
-
-    animation:
-        fadeUp .8s .2s ease both;
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 36px;
 }
 
-.hero-actions {
+.hero-buttons {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    gap: 16px;
     flex-wrap: wrap;
-
-    gap: 12px;
-
-    animation:
-        fadeUp .8s .3s ease both;
+    justify-content: center;
 }
 
-.btn {
-    min-height: 46px;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
-
-    padding: 0 20px;
-
+.primary-button {
+    padding: 14px 28px;
     border-radius: 12px;
-
+    background: var(--gradient);
     color: white;
-
-    font-size: 12px;
-    font-weight: 650;
-
-    text-decoration: none;
-
+    font-weight: 600;
+    font-size: 13px;
     cursor: pointer;
-
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease,
-        background .25s ease,
-        border-color .25s ease;
-}
-
-.btn-primary {
-    background: var(--gradient);
-
-    box-shadow:
-        0 12px 35px rgba(139,92,246,.25);
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 18px 45px rgba(139,92,246,.35);
-}
-
-.btn-secondary {
-    color: var(--text-soft);
-
-    background:
-        rgba(255,255,255,.035);
-
-    border:
-        1px solid var(--border);
-}
-
-.btn-secondary:hover {
-    color: white;
-
-    background:
-        rgba(255,255,255,.07);
-
-    border-color:
-        var(--border-light);
-
-    transform:
-        translateY(-2px);
-}
-
-/* =========================================================
-   HERO VISUAL
-========================================================= */
-
-.hero-visual {
-    position: relative;
-
-    width: min(850px, 100%);
-    height: 170px;
-
-    margin: 70px auto 0;
-
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+    transition: 0.3s;
     display: flex;
-    justify-content: center;
     align-items: center;
-
-    animation:
-        fadeUp 1s .4s ease both;
+    gap: 8px;
+    border: none;
 }
 
-.hero-line {
-    position: absolute;
-
-    width: 100%;
-    height: 1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(155,108,255,.45),
-            transparent
-        );
+.primary-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(139, 92, 246, 0.45);
 }
 
-.hero-node {
-    position: relative;
-
-    width: 105px;
-    height: 105px;
-
-    display: grid;
-    place-items: center;
-
-    border-radius: 30px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.09),
-            rgba(255,255,255,.025)
-        );
-
-    border:
-        1px solid rgba(255,255,255,.12);
-
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.45),
-        0 0 70px rgba(139,92,246,.16);
-
-    backdrop-filter:
-        blur(20px);
-
-    animation:
-        nodeFloat 5s ease-in-out infinite;
+.secondary-button {
+    padding: 14px 28px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.hero-node::before {
-    content: "";
-
-    position: absolute;
-    inset: -20px;
-
-    border-radius: 38px;
-
-    border:
-        1px solid rgba(155,108,255,.14);
-
-    animation:
-        nodePulse 3s ease-in-out infinite;
+.secondary-button:hover {
+    background: rgba(255, 255, 255, 0.08);
 }
 
-.hero-node-icon {
-    width: 55px;
-    height: 55px;
-
-    display: grid;
-    place-items: center;
-
-    border-radius: 18px;
-
-    background: var(--gradient);
-
-    box-shadow:
-        0 10px 35px rgba(139,92,246,.35);
-}
-
-/* =========================================================
-   SECTION
-========================================================= */
-
+/* FEATURES SECTION */
 .section {
-    padding: 110px 0;
+    padding: 100px 6%;
 }
 
-.section-head {
-    max-width: 700px;
-
-    margin:
-        0 auto
-        60px;
-
+.section-header {
+    max-width: 650px;
+    margin: 0 auto 60px;
     text-align: center;
 }
 
 .section-label {
-    margin-bottom: 12px;
-
-    color: var(--purple-light);
-
-    font-size: 10px;
+    color: var(--purple);
+    font-size: 11px;
     font-weight: 800;
-
-    letter-spacing: 2.5px;
+    letter-spacing: 2px;
     text-transform: uppercase;
+    margin-bottom: 12px;
 }
 
-.section-head h2 {
-    margin-bottom: 15px;
-
-    font-size:
-        clamp(30px, 4vw, 48px);
-
-    line-height: 1.1;
-
-    letter-spacing: -1.8px;
+.section-header h2 {
+    font-size: clamp(28px, 4vw, 42px);
+    letter-spacing: -1px;
+    margin-bottom: 16px;
 }
 
-.section-head p {
-    color: var(--muted);
-
-    font-size: 14px;
-    line-height: 1.8;
-}
-
-/* =========================================================
-   FEATURE GRID
-========================================================= */
-
-.features-grid {
+.features {
+    max-width: 1100px;
+    margin: auto;
     display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
 }
 
-.feature-card {
+.feature {
     position: relative;
-
-    min-height: 245px;
-
-    padding: 28px;
-
+    padding: 30px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.02);
+    transition: 0.3s;
     overflow: hidden;
-
-    border:
-        1px solid var(--border);
-
-    border-radius: 20px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.045),
-            rgba(255,255,255,.018)
-        );
-
-    transition:
-        transform .35s ease,
-        border-color .35s ease,
-        background .35s ease,
-        box-shadow .35s ease;
 }
 
-.feature-card::before {
-    content: "";
-
-    position: absolute;
-
-    width: 180px;
-    height: 180px;
-
-    top: -100px;
-    right: -100px;
-
-    border-radius: 50%;
-
-    background:
-        var(--purple);
-
-    filter:
-        blur(70px);
-
-    opacity: 0;
-
-    transition:
-        opacity .35s ease;
-}
-
-.feature-card:hover {
-    transform:
-        translateY(-7px);
-
-    border-color:
-        rgba(155,108,255,.3);
-
-    background:
-        rgba(139,92,246,.045);
-
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.25);
-}
-
-.feature-card:hover::before {
-    opacity: .13;
+.feature:hover {
+    transform: translateY(-5px);
+    border-color: rgba(139, 92, 246, 0.3);
+    background: rgba(139, 92, 246, 0.04);
 }
 
 .feature-icon {
-    position: relative;
-
     width: 48px;
     height: 48px;
-
-    display: grid;
-    place-items: center;
-
-    margin-bottom: 22px;
-
-    color: var(--purple-light);
-
-    border:
-        1px solid rgba(155,108,255,.18);
-
-    border-radius: 14px;
-
-    background:
-        rgba(139,92,246,.09);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(139, 92, 246, 0.1);
+    color: var(--purple);
+    margin-bottom: 20px;
 }
 
-.feature-card h3 {
-    margin-bottom: 10px;
-
+.feature h3 {
     font-size: 16px;
+    margin-bottom: 10px;
 }
 
-.feature-card p {
+.feature p {
     color: var(--muted);
-
-    font-size: 12px;
-    line-height: 1.75;
+    font-size: 13px;
+    line-height: 1.6;
 }
 
-/* =========================================================
-   AI SECTION
-========================================================= */
-
+/* REAL AI CHAT APP */
 .ai-section {
-    padding:
-        50px 0
-        120px;
+    padding: 60px 6% 100px;
 }
 
-.ai-shell {
-    position: relative;
-
+.ai-container {
+    max-width: 1000px;
+    margin: auto;
+    border-radius: 24px;
+    background: var(--gradient-glow);
     padding: 1px;
-
-    border-radius: 28px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(155,108,255,.4),
-            rgba(236,72,153,.18),
-            rgba(255,255,255,.04)
-        );
-
-    box-shadow:
-        0 40px 120px rgba(0,0,0,.55);
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
 }
 
-.ai-shell::before {
-    content: "";
-
-    position: absolute;
-    inset: 20%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(139,92,246,.12),
-            transparent 65%
-        );
-
-    filter:
-        blur(60px);
-
-    pointer-events: none;
-}
-
-.ai-app {
-    position: relative;
-    z-index: 2;
-
-    height: 720px;
-
+.ai-chat {
+    background: #09090e;
+    border-radius: 23px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-
-    overflow: hidden;
-
-    border-radius: 27px;
-
-    background:
-        rgba(8,8,13,.97);
+    height: 700px;
 }
 
-/* =========================================================
-   AI HEADER
-========================================================= */
-
-.ai-header {
-    height: 76px;
-
-    flex-shrink: 0;
-
+.ai-top {
+    height: 70px;
+    padding: 0 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    padding:
-        0 22px;
-
-    border-bottom:
-        1px solid var(--border);
-
-    background:
-        rgba(12,12,19,.9);
+    border-bottom: 1px solid var(--border);
+    background: rgba(13, 13, 20, 0.9);
 }
 
 .ai-profile {
     display: flex;
     align-items: center;
-
-    gap: 13px;
+    gap: 12px;
 }
 
 .ai-avatar {
-    position: relative;
-
-    width: 44px;
-    height: 44px;
-
-    display: grid;
-    place-items: center;
-
-    border-radius: 14px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #1e1b2e,
-            #0d0c14
-        );
-
-    border:
-        1px solid rgba(155,108,255,.28);
-
-    box-shadow:
-        0 8px 25px rgba(139,92,246,.18);
-}
-
-.ai-avatar::before {
-    content: "";
-
-    position: absolute;
-
-    inset: -7px;
-
-    border-radius: 18px;
-
-    border:
-        1px solid rgba(155,108,255,.12);
-
-    animation:
-        avatarPulse 3s ease-in-out infinite;
-}
-
-.ai-avatar-core {
-    width: 23px;
-    height: 23px;
-
-    display: grid;
-    place-items: center;
-
-    border-radius: 8px;
-
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
-
-    background:
-        var(--gradient);
-
-    box-shadow:
-        0 0 20px rgba(139,92,246,.35);
-}
-
-.ai-profile h3 {
+    font-weight: 800;
     font-size: 14px;
-    font-weight: 700;
 }
 
-.ai-status {
+.ai-top h3 {
+    font-size: 14px;
+}
+
+.ai-top p {
+    color: #34d399;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.ai-top p::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: #34d399;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.chat-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.control-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: 0.2s;
     display: flex;
     align-items: center;
     gap: 6px;
-
-    margin-top: 2px;
-
-    color: var(--green);
-
-    font-size: 10px;
 }
 
-.ai-status::before {
-    content: "";
-
-    width: 5px;
-    height: 5px;
-
-    border-radius: 50%;
-
-    background:
-        var(--green);
-
-    box-shadow:
-        0 0 8px rgba(52,211,153,.8);
+.control-btn:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
 }
 
-.ai-header-actions {
+.chat-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.welcome-ai {
+    text-align: center;
+    margin: auto;
+    max-width: 550px;
+}
+
+.welcome-ai h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.welcome-ai p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 24px;
+}
+
+.quick-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.quick-button {
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    color: #c4c4d4;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: left;
+    transition: 0.2s;
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.icon-button {
-    width: 36px;
-    height: 36px;
-
-    display: grid;
-    place-items: center;
-
-    color: var(--muted);
-
-    background:
-        rgba(255,255,255,.035);
-
-    border:
-        1px solid var(--border);
-
-    border-radius: 10px;
-
-    cursor: pointer;
-
-    transition:
-        color .2s ease,
-        background .2s ease,
-        transform .2s ease;
-}
-
-.icon-button:hover {
+.quick-button:hover {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.4);
     color: white;
-
-    background:
-        rgba(255,255,255,.07);
-
-    transform:
-        translateY(-1px);
 }
 
-/* =========================================================
-   CHAT BODY
-========================================================= */
-
-.chat-body {
-    flex: 1;
-
-    overflow-y: auto;
-
-    padding:
-        30px;
-
-    scroll-behavior: smooth;
-}
-
-.chat-body::-webkit-scrollbar {
-    width: 5px;
-}
-
-.chat-empty {
-    min-height: 100%;
-
+/* CHAT MESSAGES */
+.real-message {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    gap: 12px;
+    max-width: 80%;
+    animation: messageIn 0.3s ease forwards;
 }
 
-.welcome {
-    width: min(580px, 100%);
-
-    margin: auto;
-
-    text-align: center;
-}
-
-.welcome-symbol {
-    width: 64px;
-    height: 64px;
-
-    display: grid;
-    place-items: center;
-
-    margin:
-        0 auto
-        20px;
-
-    color: white;
-
-    border-radius: 20px;
-
-    background:
-        var(--gradient);
-
-    box-shadow:
-        0 15px 45px rgba(139,92,246,.25);
-}
-
-.welcome h2 {
-    margin-bottom: 9px;
-
-    font-size: 24px;
-    letter-spacing: -.7px;
-}
-
-.welcome p {
-    margin-bottom: 25px;
-
-    color: var(--muted);
-
-    font-size: 12px;
-    line-height: 1.7;
-}
-
-.quick-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 9px;
-}
-
-.quick-card {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-
-    padding:
-        13px 14px;
-
-    color: var(--text-soft);
-
-    text-align: left;
-
-    border:
-        1px solid var(--border);
-
-    border-radius: 12px;
-
-    background:
-        rgba(255,255,255,.025);
-
-    cursor: pointer;
-
-    transition:
-        color .2s ease,
-        background .2s ease,
-        border-color .2s ease,
-        transform .2s ease;
-}
-
-.quick-card:hover {
-    color: white;
-
-    background:
-        rgba(139,92,246,.08);
-
-    border-color:
-        rgba(139,92,246,.3);
-
-    transform:
-        translateY(-2px);
-}
-
-.quick-card svg {
-    width: 16px;
-    height: 16px;
-
-    color: var(--purple-light);
-
-    flex-shrink: 0;
-}
-
-.messages {
-    display: flex;
-    flex-direction: column;
-
-    gap: 20px;
-}
-
-.message {
-    display: flex;
-
-    max-width: 82%;
-
-    gap: 11px;
-
-    animation:
-        messageIn .3s ease both;
-}
-
-.message.user {
+.real-message.user {
     align-self: flex-end;
     flex-direction: row-reverse;
 }
 
-.message.ai {
+.real-message.ai {
     align-self: flex-start;
 }
 
-.message-avatar {
+.msg-avatar {
     width: 34px;
     height: 34px;
-
-    flex-shrink: 0;
-
-    display: grid;
-    place-items: center;
-
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 700;
+}
 
+.real-message.user .msg-avatar {
+    background: rgba(255, 255, 255, 0.1);
     color: white;
-
-    background:
-        rgba(255,255,255,.07);
-
-    border:
-        1px solid var(--border);
 }
 
-.message.ai .message-avatar {
-    background:
-        var(--gradient);
-
-    border-color:
-        transparent;
+.real-message.ai .msg-avatar {
+    background: var(--gradient);
+    color: white;
 }
 
-.message-content {
+.msg-content {
     display: flex;
     flex-direction: column;
-
-    gap: 5px;
+    gap: 4px;
 }
 
-.message-bubble {
-    padding:
-        13px 16px;
-
-    color: var(--text-soft);
-
-    font-size: 13px;
-    line-height: 1.7;
-
-    white-space: pre-wrap;
-
-    border:
-        1px solid var(--border);
-
+.msg-text {
+    padding: 14px 18px;
     border-radius: 16px;
-
-    background:
-        rgba(255,255,255,.035);
+    font-size: 13px;
+    line-height: 1.6;
+    position: relative;
+    white-space: pre-wrap;
 }
 
-.message.user .message-bubble {
-    color: white;
-
-    background:
-        rgba(139,92,246,.2);
-
-    border-color:
-        rgba(139,92,246,.28);
-
-    border-top-right-radius: 5px;
+.real-message.user .msg-text {
+    background: rgba(139, 92, 246, 0.2);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-top-right-radius: 4px;
 }
 
-.message.ai .message-bubble {
-    border-top-left-radius: 5px;
+.real-message.ai .msg-text {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-top-left-radius: 4px;
 }
 
-.message-actions {
+.msg-actions {
     display: flex;
-    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
 }
 
-.copy-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-
-    padding:
-        3px 5px;
-
+.copy-btn {
+    background: none;
+    border: none;
     color: var(--muted);
-
-    font-size: 10px;
-
-    background: transparent;
-
+    font-size: 11px;
     cursor: pointer;
-
-    transition:
-        color .2s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: 0.2s;
 }
 
-.copy-button:hover {
+.copy-btn:hover {
     color: white;
 }
 
-/* =========================================================
-   TYPING
-========================================================= */
+.msg-time {
+    font-size: 10px;
+    color: #555566;
+}
 
-.typing {
+.typing-indicator {
     display: none;
-
     align-items: center;
-    gap: 5px;
-
+    gap: 6px;
+    padding: 12px 18px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
     width: fit-content;
-
-    margin-top: 18px;
-
-    padding:
-        11px 15px;
-
-    border:
-        1px solid var(--border);
-
-    border-radius: 14px;
-
-    background:
-        rgba(255,255,255,.035);
 }
 
-.typing.show {
-    display: flex;
-}
-
-.typing span {
-    width: 5px;
-    height: 5px;
-
+.typing-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--muted);
     border-radius: 50%;
-
-    background:
-        var(--muted);
-
-    animation:
-        typingBounce 1.2s infinite ease-in-out;
+    animation: typing 1.4s infinite ease-in-out;
 }
 
-.typing span:nth-child(2) {
-    animation-delay: .15s;
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); opacity: 0.4; }
 }
 
-.typing span:nth-child(3) {
-    animation-delay: .3s;
+/* INPUT AREA */
+.chat-input-area {
+    padding: 16px 20px;
+    background: rgba(13, 13, 20, 0.95);
+    border-top: 1px solid var(--border);
 }
 
-/* =========================================================
-   CHAT INPUT
-========================================================= */
-
-.chat-input {
-    flex-shrink: 0;
-
-    padding:
-        15px 18px 18px;
-
-    border-top:
-        1px solid var(--border);
-
-    background:
-        rgba(10,10,16,.95);
-}
-
-.input-box {
+.chat-input-wrapper {
     display: flex;
     align-items: flex-end;
-
     gap: 10px;
-
-    padding:
-        7px 8px 7px 14px;
-
-    border:
-        1px solid var(--border);
-
-    border-radius: 15px;
-
-    background:
-        rgba(255,255,255,.035);
-
-    transition:
-        border-color .2s ease,
-        box-shadow .2s ease;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 8px 12px;
+    transition: 0.2s;
 }
 
-.input-box:focus-within {
-    border-color:
-        rgba(155,108,255,.35);
-
-    box-shadow:
-        0 0 0 4px rgba(139,92,246,.05);
+.chat-input-wrapper:focus-within {
+    border-color: var(--purple);
+    box-shadow: 0 0 12px rgba(155, 108, 255, 0.2);
 }
 
-.input-box textarea {
+.chat-input-wrapper textarea {
     flex: 1;
-
-    min-height: 38px;
-    max-height: 120px;
-
-    padding:
-        9px 0;
-
-    color: white;
-
     background: transparent;
-
-    border: 0;
-    outline: 0;
-
-    resize: none;
-
-    font-size: 13px;
-    line-height: 1.5;
-}
-
-.input-box textarea::placeholder {
-    color:
-        rgba(255,255,255,.28);
-}
-
-.send-button {
-    width: 40px;
-    height: 40px;
-
-    flex-shrink: 0;
-
-    display: grid;
-    place-items: center;
-
+    border: none;
+    outline: none;
     color: white;
+    font-size: 13px;
+    font-family: inherit;
+    resize: none;
+    max-height: 120px;
+    min-height: 38px;
+    padding: 8px 0;
+}
 
-    border-radius: 11px;
-
-    background:
-        var(--gradient);
-
+.send-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--gradient);
+    border: none;
+    color: white;
     cursor: pointer;
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        opacity .2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    flex-shrink: 0;
 }
 
-.send-button:hover:not(:disabled) {
-    transform:
-        scale(1.05);
-
-    box-shadow:
-        0 8px 25px rgba(139,92,246,.3);
+.send-btn:hover {
+    transform: scale(1.05);
 }
 
-.send-button:disabled {
-    opacity: .45;
+.send-btn:disabled {
+    opacity: 0.4;
     cursor: not-allowed;
+    transform: none;
 }
 
-.input-hint {
-    margin-top: 8px;
-
-    color:
-        rgba(255,255,255,.23);
-
-    font-size: 9px;
-
-    text-align: center;
-}
-
-/* =========================================================
-   THANKS
-========================================================= */
-
+/* THANK YOU SECTION */
 .thanks-section {
-    padding:
-        80px 0
-        120px;
+    padding: 80px 6% 120px;
 }
 
 .thanks-card {
-    position: relative;
-
     max-width: 850px;
-
-    margin-inline: auto;
-
-    padding:
-        65px 40px;
-
-    overflow: hidden;
-
+    margin: auto;
+    padding: 60px 40px;
     text-align: center;
-
-    border:
-        1px solid var(--border);
-
+    border: 1px solid rgba(236, 72, 153, 0.2);
     border-radius: 28px;
-
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(236,72,153,.1),
-            transparent 55%
-        ),
-        rgba(255,255,255,.02);
+    background: radial-gradient(circle at 50% 0%, rgba(236, 72, 153, 0.12), transparent 60%), rgba(255, 255, 255, 0.015);
 }
 
-.thanks-icon {
-    width: 52px;
-    height: 52px;
-
-    display: grid;
-    place-items: center;
-
-    margin:
-        0 auto
-        20px;
-
-    color: #f9a8d4;
-
-    border-radius: 16px;
-
-    background:
-        rgba(236,72,153,.09);
-
-    border:
-        1px solid rgba(236,72,153,.15);
+.heart-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 20px;
+    color: var(--pink);
 }
 
 .thanks-card h2 {
-    margin-bottom: 14px;
-
-    font-size:
-        clamp(27px, 4vw, 38px);
-
-    letter-spacing: -1px;
+    font-size: 32px;
+    margin-bottom: 16px;
 }
 
 .thanks-card p {
-    max-width: 650px;
-
-    margin:
-        0 auto 14px;
-
     color: var(--muted);
-
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.8;
+    max-width: 680px;
+    margin: 0 auto 16px;
 }
 
-.thanks-highlight {
+.special-thanks {
     margin-top: 30px !important;
-
-    color:
-        #f5d8e8 !important;
-
-    font-size:
-        15px !important;
-
-    font-weight:
-        600;
+    color: #f3d5e7 !important;
+    font-size: 16px !important;
+    font-weight: 600;
 }
 
-/* =========================================================
-   FOOTER
-========================================================= */
-
+/* FOOTER */
 footer {
-    padding:
-        28px 0;
-
-    border-top:
-        1px solid var(--border);
-
-    color:
-        var(--muted);
-
-    font-size:
-        10px;
-}
-
-.footer-inner {
+    padding: 30px 6%;
+    border-top: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    gap: 20px;
-}
-
-.footer-brand {
-    color:
-        var(--text-soft);
-}
-
-/* =========================================================
-   SCROLL REVEAL
-========================================================= */
-
-.reveal {
-    opacity: 0;
-    transform:
-        translateY(25px);
-
-    transition:
-        opacity .7s ease,
-        transform .7s ease;
-}
-
-.reveal.visible {
-    opacity: 1;
-    transform:
-        translateY(0);
-}
-
-/* =========================================================
-   ANIMATIONS
-========================================================= */
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform:
-            translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform:
-            translateY(0);
-    }
-}
-
-@keyframes nodeFloat {
-    0%,100% {
-        transform:
-            translateY(0)
-            rotate(0deg);
-    }
-
-    50% {
-        transform:
-            translateY(-8px)
-            rotate(2deg);
-    }
-}
-
-@keyframes nodePulse {
-    0%,100% {
-        transform:
-            scale(.92);
-
-        opacity:
-            .35;
-    }
-
-    50% {
-        transform:
-            scale(1.08);
-
-        opacity:
-            .8;
-    }
-}
-
-@keyframes avatarPulse {
-    0%,100% {
-        transform:
-            scale(.95);
-
-        opacity:
-            .25;
-    }
-
-    50% {
-        transform:
-            scale(1.08);
-
-        opacity:
-            .7;
-    }
-}
-
-@keyframes typingBounce {
-    0%,100% {
-        transform:
-            translateY(0);
-
-        opacity:
-            .45;
-    }
-
-    50% {
-        transform:
-            translateY(-4px);
-
-        opacity:
-            1;
-    }
+    color: var(--muted);
+    font-size: 11px;
 }
 
 @keyframes messageIn {
-    from {
-        opacity: 0;
-        transform:
-            translateY(8px);
-    }
-
-    to {
-        opacity: 1;
-        transform:
-            translateY(0);
-    }
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width: 950px) {
-
-    .nav-links,
-    .nav-action {
-        display: none;
-    }
-
-    .mobile-toggle {
-        display: grid;
-    }
-
-    .features-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-}
-
-@media(max-width: 700px) {
-
-    .container,
-    .nav-inner {
-        width:
-            min(
-                100% - 28px,
-                1180px
-            );
-    }
-
-    .hero {
-        padding-top:
-            calc(var(--nav-height) + 50px);
-    }
-
-    .hero h1 {
-        font-size:
-            clamp(38px, 12vw, 58px);
-
-        letter-spacing:
-            -2.5px;
-    }
-
-    .hero-description {
-        font-size:
-            13px;
-    }
-
-    .hero-visual {
-        margin-top:
-            50px;
-
-        height:
-            120px;
-    }
-
-    .hero-node {
-        width:
-            80px;
-
-        height:
-            80px;
-
-        border-radius:
-            23px;
-    }
-
-    .hero-node-icon {
-        width:
-            45px;
-
-        height:
-            45px;
-    }
-
-    .section {
-        padding:
-            80px 0;
-    }
-
-    .features-grid {
-        grid-template-columns:
-            1fr;
-    }
-
-    .ai-section {
-        padding:
-            30px 0
-            80px;
-    }
-
-    .ai-app {
-        height:
-            680px;
-
-        border-radius:
-            22px;
-    }
-
-    .ai-shell {
-        border-radius:
-            23px;
-    }
-
-    .ai-header {
-        padding:
-            0 14px;
-    }
-
-    .chat-body {
-        padding:
-            20px 15px;
-    }
-
-    .quick-grid {
-        grid-template-columns:
-            1fr;
-    }
-
-    .message {
-        max-width:
-            94%;
-    }
-
-    .thanks-card {
-        padding:
-            45px 22px;
-    }
-
-    .footer-inner {
-        flex-direction:
-            column;
-
-        align-items:
-            flex-start;
-    }
-}
-
-@media(max-width: 430px) {
-
-    .hero-actions {
-        flex-direction:
-            column;
-    }
-
-    .hero-actions .btn {
-        width:
-            100%;
-    }
-
-    .ai-profile h3 {
-        font-size:
-            12px;
-    }
-
-    .ai-status {
-        font-size:
-            9px;
-    }
-
-    .message-bubble {
-        font-size:
-            12px;
-
-        padding:
-            11px 13px;
-    }
-}
-
-@media(prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration:
-            .01ms !important;
-
-        animation-iteration-count:
-            1 !important;
-
-        scroll-behavior:
-            auto !important;
-
-        transition-duration:
-            .01ms !important;
-    }
+@media(max-width: 768px) {
+    .nav-links { display: none; }
+    .quick-buttons { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 36px; }
+    .real-message { max-width: 90%; }
+    .ai-chat { height: 600px; }
+    .thanks-card { padding: 40px 20px; }
 }
 </style>
-
 </head>
-
 <body>
 
-<!-- =========================================================
-     NAVIGATION
-========================================================= -->
-
-<nav class="navbar" id="navbar">
-
-```
-<div class="nav-inner">
-
+<!-- NAVBAR -->
+<nav class="navbar">
     <a href="#home" class="logo">
-
-        <div class="logo-mark">
-            <i data-lucide="bot"></i>
-        </div>
-
-        <div class="logo-copy">
+        <div class="logo-icon"><i data-lucide="bot"></i></div>
+        <div class="logo-text">
             <strong>ARUZHAN AI</strong>
-            <span>Intelligent Conversation Assistant</span>
+            <span>Smart Relationship Assistant</span>
         </div>
-
     </a>
-
     <div class="nav-links">
-
-        <a href="#home">
-            Басты бет
-        </a>
-
-        <a href="#features">
-            Мүмкіндіктер
-        </a>
-
-        <a href="#ai">
-            AI Ассистент
-        </a>
-
-        <a href="#thanks">
-            Жоба
-        </a>
-
+        <a href="#home">Басты бет</a>
+        <a href="#features">Мүмкіндіктер</a>
+        <a href="#ai">AI Ассистент</a>
+        <a href="#thanks">Алғыс</a>
     </div>
-
-    <a href="#ai" class="nav-action">
-        <i data-lucide="sparkles"></i>
-        AI-мен сөйлесу
-    </a>
-
-    <button
-        class="mobile-toggle"
-        id="mobileToggle"
-        aria-label="Мәзірді ашу"
-    >
-        <i data-lucide="menu"></i>
-    </button>
-
-</div>
-```
-
+    <a href="#ai" class="nav-button"><i data-lucide="sparkles"></i> AI-мен сөйлесу</a>
 </nav>
 
-<!-- MOBILE MENU -->
-
-<div class="mobile-menu" id="mobileMenu">
-
-```
-<a href="#home">
-    Басты бет
-</a>
-
-<a href="#features">
-    Мүмкіндіктер
-</a>
-
-<a href="#ai">
-    AI Ассистент
-</a>
-
-<a href="#thanks">
-    Жоба
-</a>
-```
-
-</div>
-
-<!-- =========================================================
-     HERO
-========================================================= -->
-
-<main>
-
+<!-- HERO -->
 <section class="hero" id="home">
-
-```
-<div class="hero-orb one"></div>
-<div class="hero-orb two"></div>
-
-<div class="container">
-
-    <div class="hero-content">
-
-        <div class="hero-badge">
-
-            <span class="status-dot"></span>
-
-            ARUZHAN AI
-            — INTELLIGENT DIALOGUE ENGINE
-
-        </div>
-
-        <h1>
-            Қарым-қатынасты
-            табиғи түрде
-            баста.
-        </h1>
-
-        <p class="hero-description">
-
-            ARUZHAN AI — диалогты түсінуге,
-            дұрыс жауап құруға және кез келген
-            әңгімені табиғи түрде жалғастыруға
-            көмектесетін интеллектуалды ассистент.
-
-        </p>
-
-        <div class="hero-actions">
-
-            <a
-                href="#ai"
-                class="btn btn-primary"
-            >
-                <i data-lucide="message-circle"></i>
-                Ассистентті іске қосу
-            </a>
-
-            <a
-                href="#features"
-                class="btn btn-secondary"
-            >
-                <i data-lucide="compass"></i>
-                Мүмкіндіктерді көру
-            </a>
-
-        </div>
-
+    <div class="badge">
+        <span class="badge-dot"></span>
+        ARUZHAN AI v2.0 — ШЫНАЙЫ ҚАРЫМ-ҚАТЫНАС КӨМЕКШІСІ
     </div>
-
-    <div class="hero-visual">
-
-        <div class="hero-line"></div>
-
-        <div class="hero-node">
-
-            <div class="hero-node-icon">
-
-                <i
-                    data-lucide="sparkles"
-                ></i>
-
-            </div>
-
-        </div>
-
+    <h1>Қызбен сөйлесуде тартынып жүрсің бе?</h1>
+    <p>ARUZHAN AI — диалогты табиғи жүргізуге, алғашқы хабарламаны әдемі бастауға және кез келген диалогты қызықты етуге арналған ақылды интеллект.</p>
+    <div class="hero-buttons">
+        <a href="#ai" class="primary-button"><i data-lucide="message-square"></i> Ассистентті іске қосу</a>
+        <a href="#features" class="secondary-button"><i data-lucide="compass"></i> Мүмкіндіктерді көру</a>
     </div>
-
-</div>
-```
-
 </section>
 
-<!-- =========================================================
-     FEATURES
-========================================================= -->
-
-<section
-    class="section"
-    id="features"
->
-
-```
-<div class="container">
-
-    <div class="section-head reveal">
-
-        <div class="section-label">
-            WHY ARUZHAN AI
+<!-- FEATURES -->
+<section class="section" id="features">
+    <div class="section-header">
+        <div class="section-label">НЕЛІКТЕН ARUZHAN AI?</div>
+        <h2>Тіл табысу енді өте оңай</h2>
+        <p>AI көмекші сіздің жағдайыңызды терең түсініп, ең орынды әрі әдемі жауап нұсқаларын дайындайды.</p>
+    </div>
+    <div class="features">
+        <div class="feature">
+            <div class="feature-icon"><i data-lucide="message-circle"></i></div>
+            <h3>Әңгіме бастау</h3>
+            <p>Танысуды немесе диалогты тартымды әрі ерекше бастауға арналған ақылды идеялар.</p>
         </div>
-
-        <h2>
-            Диалогты түсіну оңайырақ
-        </h2>
-
-        <p>
-            Жағдайды сипаттаңыз.
-            ARUZHAN AI сізге табиғи,
-            сыпайы және орынды жауап
-            нұсқаларын ұсынады.
-        </p>
-
+        <div class="feature">
+            <div class="feature-icon"><i data-lucide="heart"></i></div>
+            <h3>Жылы жауап қайтару</h3>
+            <p>Құрғақ мәтіндерді сезімге толы, табиғи әрі әдемі етіп өзгерту.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon"><i data-lucide="help-circle"></i></div>
+            <h3>Мағынасын талдау</h3>
+            <p>Қыздың жазған хабарламасының астарын, көңіл-күйін және шынайы ойын түсіну.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon"><i data-lucide="layers"></i></div>
+            <h3>Вариативтілік</h3>
+            <p>Бір жағдайға 3 түрлі стилде жауап: әзілмен, салмақты немесе романтикалық.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon"><i data-lucide="zap"></i></div>
+            <h3>Тығырықтан шығу</h3>
+            <p>Әңгіме тоқтап қалғанда диалогты жандандыратын ақылды сұрақтар генерациясы.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon"><i data-lucide="shield-check"></i></div>
+            <h3>Этика және Сыйластық</h3>
+            <p>Тек шынайы, сыпайы және адамгершілікке негізделген кеңестер.</p>
+        </div>
     </div>
-
-    <div class="features-grid">
-
-        <article class="feature-card reveal">
-
-            <div class="feature-icon">
-                <i data-lucide="message-circle"></i>
-            </div>
-
-            <h3>
-                Әңгіме бастау
-            </h3>
-
-            <p>
-                Бірінші хабарламаны
-                табиғи әрі қызықты
-                түрде құруға көмектеседі.
-            </p>
-
-        </article>
-
-        <article class="feature-card reveal">
-
-            <div class="feature-icon">
-                <i data-lucide="heart"></i>
-            </div>
-
-            <h3>
-                Жылы жауап
-            </h3>
-
-            <p>
-                Құрғақ мәтінді жылы,
-                адамға жақын және
-                табиғи жауапқа айналдырады.
-            </p>
-
-        </article>
-
-        <article class="feature-card reveal">
-
-            <div class="feature-icon">
-                <i data-lucide="search"></i>
-            </div>
-
-            <h3>
-                Диалогты талдау
-            </h3>
-
-            <p>
-                Хабарламадағы контексті
-                түсініп, ықтимал мағынасын
-                байыппен түсіндіреді.
-            </p>
-
-        </article>
-
-        <article class="feature-card reveal">
-
-            <div class="feature-icon">
-                <i data-lucide="layers"></i>
-            </div>
-
-            <h3>
-                Бірнеше нұсқа
-            </h3>
-
-            <p>
-                Бір жағдайға бірнеше
-                түрлі жауап стилін
-                дайындауға мүмкіндік береді.
-            </p>
-
-        </article>
-
-        <article class="feature-card reveal">
-
-            <div class="feature-icon">
-                <i data-lucide="zap"></i>
-            </div>
-
-            <h3>
-                Диалогты жалғастыру
-            </h3>
-
-            <p>
-                Әңгіме тоқтап қалған кезде
-                жаңа тақырыптар мен
-                сұрақтар ұсынады.
-            </p>
-
-        </article>
-
-        <article class="feature-card reveal">
-
-            <div class="feature-icon">
-                <i data-lucide="shield-check"></i>
-            </div>
-
-            <h3>
-                Сыйластық
-            </h3>
-
-            <p>
-                Қарым-қатынаста шынайылық,
-                әдептілік және өзара
-                құрмет принциптерін сақтайды.
-            </p>
-
-        </article>
-
-    </div>
-
-</div>
-```
-
 </section>
 
-<!-- =========================================================
-     AI CHAT
-========================================================= -->
-
-<section
-    class="ai-section"
-    id="ai"
->
-
-```
-<div class="container">
-
-    <div class="ai-shell">
-
-        <div class="ai-app">
-
-            <!-- HEADER -->
-
-            <header class="ai-header">
-
+<!-- AI CHAT APP -->
+<section class="ai-section" id="ai">
+    <div class="ai-container">
+        <div class="ai-chat">
+            <div class="ai-top">
                 <div class="ai-profile">
-
-                    <div class="ai-avatar">
-
-                        <div class="ai-avatar-core">
-
-                            <i
-                                data-lucide="bot"
-                            ></i>
-
-                        </div>
-
-                    </div>
-
+                    <div class="ai-avatar"><i data-lucide="bot"></i></div>
                     <div>
-
-                        <h3>
-                            ARUZHAN AI
-                        </h3>
-
-                        <div class="ai-status">
-                            Белсенді — дайын
-                        </div>
-
+                        <h3>ARUZHAN AI</h3>
+                        <p>Белсенді — Көмектесуге дайын</p>
                     </div>
-
                 </div>
-
-                <div class="ai-header-actions">
-
-                    <button
-                        class="icon-button"
-                        id="clearChat"
-                        title="Чатты тазалау"
-                    >
-                        <i data-lucide="trash-2"></i>
-                    </button>
-
+                <div class="chat-controls">
+                    <button class="control-btn" onclick="clearChat()"><i data-lucide="trash-2"></i> Тазалау</button>
                 </div>
-
-            </header>
-
-            <!-- BODY -->
-
-            <div
-                class="chat-body"
-                id="chatBody"
-            >
-
-                <div
-                    class="chat-empty"
-                    id="chatEmpty"
-                >
-
-                    <div class="welcome">
-
-                        <div class="welcome-symbol">
-
-                            <i
-                                data-lucide="sparkles"
-                            ></i>
-
-                        </div>
-
-                        <h2>
-                            Сәлем! Мен ARUZHAN AI
-                        </h2>
-
-                        <p>
-                            Жағдайыңызды жазыңыз.
-                            Мен сізге сәйкес
-                            жауап немесе кеңес
-                            дайындауға көмектесемін.
-                        </p>
-
-                        <div class="quick-grid">
-
-                            <button
-                                class="quick-card"
-                                data-question="Қызбен танысуды қалай табиғи бастасам болады?"
-                            >
-
-                                <i
-                                    data-lucide="sparkles"
-                                ></i>
-
-                                Бірінші болып не жазамын?
-
-                            </button>
-
-                            <button
-                                class="quick-card"
-                                data-question="Ол маған: Күнің қалай өтті? деп жазды. Қалай жауап берген дұрыс?"
-                            >
-
-                                <i
-                                    data-lucide="message-square"
-                                ></i>
-
-                                Жауап дайындау
-
-                            </button>
-
-                            <button
-                                class="quick-card"
-                                data-question="Әңгіме тоқтап қалды. Диалогты жалғастыру үшін қызықты сұрақтар берші."
-                            >
-
-                                <i
-                                    data-lucide="help-circle"
-                                ></i>
-
-                                Әңгімені жалғастыру
-
-                            </button>
-
-                            <button
-                                class="quick-card"
-                                data-question="Ол маған Көрерміз деп жазды. Бұл жауапты қалай түсінуге болады?"
-                            >
-
-                                <i
-                                    data-lucide="search"
-                                ></i>
-
-                                Мағынасын талдау
-
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div
-                    class="messages"
-                    id="messages"
-                ></div>
-
-                <div
-                    class="typing"
-                    id="typing"
-                >
-
-                    <span></span>
-                    <span></span>
-                    <span></span>
-
-                </div>
-
             </div>
 
-            <!-- INPUT -->
-
-            <div class="chat-input">
-
-                <div class="input-box">
-
-                    <textarea
-                        id="messageInput"
-                        rows="1"
-                        placeholder="Жағдайыңызды жазыңыз..."
-                        aria-label="Хабарлама"
-                    ></textarea>
-
-                    <button
-                        class="send-button"
-                        id="sendButton"
-                        aria-label="Жіберу"
-                    >
-
-                        <i
-                            data-lucide="arrow-up"
-                        ></i>
-
-                    </button>
-
+            <div class="chat-body" id="chatBody">
+                <div class="welcome-ai" id="welcomeAI">
+                    <h2>Сәлем! Men Aruzhan AI-мын 🤍</h2>
+                    <p>Қандай жағдай болып жатыр? Төмендегі дайын түймелердің бірін басыңыз немесе өз жағдайыңызды жазыңыз.</p>
+                    <div class="quick-buttons">
+                        <button class="quick-button" onclick="quickQuestion('Қызбен танысуды қалай ерекше бастасам болады?')">
+                            <i data-lucide="sparkles"></i> Бірінші болып не жазамын?
+                        </button>
+                        <button class="quick-button" onclick="quickQuestion('Ол маған: «Күнің қалай өтті?» деп жазды. Не деп жауап берейін?')">
+                            <i data-lucide="message-square"></i> Жауап дайындау
+                        </button>
+                        <button class="quick-button" onclick="quickQuestion('Әңгіме тоқтап қалды. Диалогты жалғастыруға 3 қызықты сұрақ берші.')">
+                            <i data-lucide="help-circle"></i> Әңгімені жандандыру
+                        </button>
+                        <button class="quick-button" onclick="quickQuestion('Ол маған: «Көрерміз...» деп жазды. Бұл нені білдіреді?')">
+                            <i data-lucide="search"></i> Астарлы мағынасын түсіну
+                        </button>
+                    </div>
                 </div>
 
-                <div class="input-hint">
+                <div id="messagesList" style="display:flex; flex-direction:column; gap:16px;"></div>
 
-                    Enter — жіберу
-                    · Shift + Enter — жаңа жол
-
+                <div class="typing-indicator" id="typing">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
                 </div>
-
             </div>
 
+            <div class="chat-input-area">
+                <div class="chat-input-wrapper">
+                    <textarea id="messageInput" placeholder="Жағдайыңызды немесе оның сөзін жазыңыз..." rows="1" onkeydown="handleEnter(event)" oninput="autoResize(this)"></textarea>
+                    <button class="send-btn" id="sendBtn" onclick="sendMessage()"><i data-lucide="send"></i></button>
+                </div>
+            </div>
         </div>
-
     </div>
-
-</div>
-```
-
 </section>
 
-<!-- =========================================================
-     THANKS
-========================================================= -->
-
-<section
-    class="thanks-section"
-    id="thanks"
->
-
-```
-<div class="container">
-
-    <div class="thanks-card reveal">
-
-        <div class="thanks-icon">
-
-            <i data-lucide="heart"></i>
-
-        </div>
-
-        <div class="section-label">
-            SPECIAL PROJECT
-        </div>
-
-        <h2>
-            ARUZHAN AI
-        </h2>
-
-        <p>
-            Бұл жоба адамдар арасындағы
-            қарым-қатынасты түсінуге,
-            ойды дұрыс жеткізуге және
-            табиғи диалог құруға көмектесу
-            идеясы негізінде жасалған.
-        </p>
-
-        <p class="thanks-highlight">
-            Аружанға арнайы алғысымызды
-            білдіреміз. 🤍
-        </p>
-
+<!-- THANK YOU -->
+<section class="thanks-section" id="thanks">
+    <div class="thanks-card">
+        <i data-lucide="heart" class="heart-icon"></i>
+        <div class="section-label">SPECIAL THANKS</div>
+        <h2>Жобаның Шығу Тарихы</h2>
+        <p>ARUZHAN AI — адамдар арасындағы қарым-қатынасты жақсартуға, сезімдерді дұрыс жеткізуге және диалог құрудағы сенімсіздікті жоюға арналған жеке жоба.</p>
+        <p class="special-thanks">Аружанға арнайы алғысымызды білдіреміз! 🤍<br><br>Аружан, осы жобаның пайда болуына шабыт бергенің және қолдау көрсеткенің үшін үлкен рақмет!</p>
     </div>
-
-</div>
-```
-
 </section>
 
-</main>
-
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
+<!-- FOOTER -->
 <footer>
-
-```
-<div class="container">
-
-    <div class="footer-inner">
-
-        <span>
-            © 2026
-            <strong class="footer-brand">
-                ARUZHAN AI
-            </strong>
-        </span>
-
-        <span>
-            Intelligent Dialogue Experience
-        </span>
-
-    </div>
-
-</div>
-```
-
+    <span>© 2026 <strong>ARUZHAN AI</strong> — Барлық құқықтар қорғалған.</span>
+    <span>Powered by Advanced Dialogue Engine</span>
 </footer>
 
 <script>
-/* =========================================================
-   ARUZHAN AI
-   APPLICATION LOGIC
-========================================================= */
+// INITIALIZE LUCIDE ICONS
+lucide.createIcons();
 
-"use strict";
+const messageInput = document.getElementById("messageInput");
+const messagesList = document.getElementById("messagesList");
+const chatBody = document.getElementById("chatBody");
+const welcomeAI = document.getElementById("welcomeAI");
+const typing = document.getElementById("typing");
+const sendBtn = document.getElementById("sendBtn");
 
-/* =========================================================
-   INITIALIZATION
-========================================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        lucide.createIcons();
-
-        initializeNavigation();
-        initializeMobileMenu();
-        initializeScrollReveal();
-        initializeChat();
-        initializeQuickQuestions();
-
-    }
-);
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-function initializeNavigation() {
-
-    const navbar =
-        document.getElementById(
-            "navbar"
-        );
-
-    window.addEventListener(
-        "scroll",
-        () => {
-
-            if (
-                window.scrollY > 20
-            ) {
-
-                navbar.classList.add(
-                    "scrolled"
-                );
-
-            } else {
-
-                navbar.classList.remove(
-                    "scrolled"
-                );
-
-            }
-
-        },
-        {
-            passive: true
-        }
-    );
-
+function autoResize(textarea) {
+    textarea.style.height = "auto";
+    textarea.style.height = (textarea.scrollHeight < 120 ? textarea.scrollHeight : 120) + "px";
 }
 
-/* =========================================================
-   MOBILE MENU
-========================================================= */
-
-function initializeMobileMenu() {
-
-    const toggle =
-        document.getElementById(
-            "mobileToggle"
-        );
-
-    const menu =
-        document.getElementById(
-            "mobileMenu"
-        );
-
-    if (
-        !toggle ||
-        !menu
-    ) return;
-
-    toggle.addEventListener(
-        "click",
-        () => {
-
-            menu.classList.toggle(
-                "open"
-            );
-
-        }
-    );
-
-    menu
-        .querySelectorAll("a")
-        .forEach(
-            link => {
-
-                link.addEventListener(
-                    "click",
-                    () => {
-
-                        menu.classList.remove(
-                            "open"
-                        );
-
-                    }
-                );
-
-            }
-        );
-
+function handleEnter(e) {
+    if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+    }
 }
 
-/* =========================================================
-   SCROLL REVEAL
-========================================================= */
-
-function initializeScrollReveal() {
-
-    const elements =
-        document.querySelectorAll(
-            ".reveal"
-        );
-
-    if (
-        !("IntersectionObserver" in window)
-    ) {
-
-        elements.forEach(
-            element => {
-
-                element.classList.add(
-                    "visible"
-                );
-
-            }
-        );
-
-        return;
-
-    }
-
-    const observer =
-        new IntersectionObserver(
-            entries => {
-
-                entries.forEach(
-                    entry => {
-
-                        if (
-                            entry.isIntersecting
-                        ) {
-
-                            entry.target.classList.add(
-                                "visible"
-                            );
-
-                            observer.unobserve(
-                                entry.target
-                            );
-
-                        }
-
-                    }
-                );
-
-            },
-            {
-                threshold: .12
-            }
-        );
-
-    elements.forEach(
-        element => {
-
-            observer.observe(
-                element
-            );
-
-        }
-    );
-
+function quickQuestion(text) {
+    messageInput.value = text;
+    autoResize(messageInput);
+    sendMessage();
 }
-
-/* =========================================================
-   CHAT INITIALIZATION
-========================================================= */
-
-function initializeChat() {
-
-    const input =
-        document.getElementById(
-            "messageInput"
-        );
-
-    const sendButton =
-        document.getElementById(
-            "sendButton"
-        );
-
-    const clearButton =
-        document.getElementById(
-            "clearChat"
-        );
-
-    if (
-        !input ||
-        !sendButton
-    ) return;
-
-    input.addEventListener(
-        "input",
-        () => {
-
-            autoResize(
-                input
-            );
-
-        }
-    );
-
-    input.addEventListener(
-        "keydown",
-        event => {
-
-            if (
-                event.key === "Enter" &&
-                !event.shiftKey
-            ) {
-
-                event.preventDefault();
-
-                sendMessage();
-
-            }
-
-        }
-    );
-
-    sendButton.addEventListener(
-        "click",
-        sendMessage
-    );
-
-    clearButton.addEventListener(
-        "click",
-        clearChat
-    );
-
-}
-
-/* =========================================================
-   QUICK QUESTIONS
-========================================================= */
-
-function initializeQuickQuestions() {
-
-    const buttons =
-        document.querySelectorAll(
-            ".quick-card"
-        );
-
-    buttons.forEach(
-        button => {
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    const question =
-                        button.dataset.question;
-
-                    const input =
-                        document.getElementById(
-                            "messageInput"
-                        );
-
-                    input.value =
-                        question;
-
-                    autoResize(
-                        input
-                    );
-
-                    sendMessage();
-
-                }
-            );
-
-        }
-    );
-
-}
-
-/* =========================================================
-   SEND MESSAGE
-========================================================= */
-
-let isGenerating = false;
-
-function sendMessage() {
-
-    if (
-        isGenerating
-    ) return;
-
-    const input =
-        document.getElementById(
-            "messageInput"
-        );
-
-    const text =
-        input.value.trim();
-
-    if (
-        !text
-    ) return;
-
-    const chatEmpty =
-        document.getElementById(
-            "chatEmpty"
-        );
-
-    const messages =
-        document.getElementById(
-            "messages"
-        );
-
-    const typing =
-        document.getElementById(
-            "typing"
-        );
-
-    const sendButton =
-        document.getElementById(
-            "sendButton"
-        );
-
-    chatEmpty.classList.add(
-        "hidden"
-    );
-
-    addMessage(
-        text,
-        "user"
-    );
-
-    input.value = "";
-
-    autoResize(
-        input
-    );
-
-    isGenerating = true;
-
-    sendButton.disabled =
-        true;
-
-    typing.classList.add(
-        "show"
-    );
-
-    scrollChatToBottom();
-
-    const delay =
-        800 +
-        Math.random() *
-        700;
-
-    setTimeout(
-        async () => {
-
-            try {
-
-                const response =
-                    await getAIResponse(
-                        text
-                    );
-
-                typing.classList.remove(
-                    "show"
-                );
-
-                addMessage(
-                    response,
-                    "ai"
-                );
-
-            } catch (
-                error
-            ) {
-
-                console.error(
-                    error
-                );
-
-                typing.classList.remove(
-                    "show"
-                );
-
-                addMessage(
-                    "Кешіріңіз, жауап дайындау кезінде қате орын алды. Қайтадан байқап көріңіз.",
-                    "ai"
-                );
-
-            } finally {
-
-                isGenerating =
-                    false;
-
-                sendButton.disabled =
-                    false;
-
-                scrollChatToBottom();
-
-            }
-
-        },
-        delay
-    );
-
-}
-
-/* =========================================================
-   AI RESPONSE
-========================================================= */
-
-async function getAIResponse(
-    input
-) {
-
-    async function getAIResponse(input) {
-
-    const response = await fetch(
-        "http://localhost:3000/api/chat",
-        {
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-                message: input
-            })
-        }
-    );
-
-    if (!response.ok) {
-        throw new Error(
-            "Backend серверінен жауап алу мүмкін болмады"
-        );
-    }
-
-    const data = await response.json();
-
-    return data.reply;
-}
-/* =========================================================
-   LOCAL AI ENGINE
-========================================================= */
-
-function generateLocalResponse(
-    input
-) {
-
-    const text =
-        input.toLowerCase();
-
-    if (
-        text.includes("танысу") ||
-        text.includes("бірінші") ||
-        text.includes("жазсам") ||
-        text.includes("бастасам")
-    ) {
-
-        return [
-            "Ең дұрысы — бірден тым жасанды немесе артық романтикаға кетпеу.",
-            "",
-            "Мына 3 бағыттың бірін қолдануға болады:",
-            "",
-            "1. Жылы әрі табиғи:",
-            "«Сәлем! Қалайсың? Бүгінгі күнің қалай өтіп жатыр? 😊»",
-            "",
-            "2. Ортақ қызығушылық арқылы:",
-            "«Сәлем! Сенің [музыка/фильм/хобби] ұнататыныңды байқап қалдым. Өзіңе ең қатты ұнайтыны қайсы?»",
-            "",
-            "3. Жеңіл әзілмен:",
-            "«Сәлем! Саған бір маңызды сұрақ қойсам бола ма? 😄»",
-            "",
-            "Ең бастысы — дайын мәтінді сол күйі көшірмей, өз сөзіңе бейімдеу."
-        ].join("\n");
-
-    }
-
-    if (
-        text.includes("күнің қалай өтті") ||
-        text.includes("не істеп")
-    ) {
-
-        return [
-            "Егер ол саған «Күнің қалай өтті?» деп жазса, бұл әңгімені жалғастыруға жақсы мүмкіндік.",
-            "",
-            "Мысалы:",
-            "«Жақсы өтті, біраз шаруамен жүрдім. Қазір демалып отырмын 😊 Ал сенің күнің қалай өтті?»",
-            "",
-            "Жауаптың соңына өзің де сұрақ қоссаң, диалогтың жалғасуы оңайырақ болады."
-        ].join("\n");
-
-    }
-
-    if (
-        text.includes("тоқтап") ||
-        text.includes("тақырып") ||
-        text.includes("сұрақ")
-    ) {
-
-        return [
-            "Әңгіме тоқтап қалса, бірден көп сұрақ жаудырмай, ашық сұрақ қойып көр.",
-            "",
-            "Мысалы:",
-            "",
-            "1. «Қазір кез келген жерге саяхаттау мүмкіндігі болса, қайда барар едің?»",
-            "",
-            "2. «Соңғы кезде саған қатты ұнаған фильм немесе сериал болды ма?»",
-            "",
-            "3. «Бос уақытыңды көбіне қалай өткізгенді ұнатасың?»",
-            "",
-            "Осы сұрақтардың бірін таңдап, өзің де жауап берсең, әңгіме екі жақты болады."
-        ].join("\n");
-
-    }
-
-    if (
-        text.includes("көрерміз") ||
-        text.includes("білмеймін") ||
-        text.includes("мағына")
-    ) {
-
-        return [
-            "«Көрерміз» деген сөздің нақты мағынасы контекстке байланысты.",
-            "",
-            "Ол:",
-            "• нақты шешім қабылдамаған болуы мүмкін;",
-            "• уақыт керек болуы мүмкін;",
-            "• сыпайы түрде кейінге қалдырғысы келуі мүмкін.",
-            "",
-            "Сондықтан бір ғана сөзге қарап нақты қорытынды жасамаған дұрыс.",
-            "",
-            "Ең жақсы жолы — қысым жасамай, сабырлы түрде сөйлесуді жалғастыру."
-        ].join("\n");
-
-    }
-
-    if (
-        text.includes("ренж") ||
-        text.includes("кешір") ||
-        text.includes("татулас")
-    ) {
-
-        return [
-            "Егер адам ренжіген болса, ең маңыздысы — бірден өзіңді ақтауға тырыспау.",
-            "",
-            "Мысалы:",
-            "",
-            "«Сені ренжітіп қойған болсам, кешірші. Менің мақсатым сені ренжіту емес еді. Қаласаң, асықпай сөйлесіп, түсінісіп алсақ болады.»",
-            "",
-            "Шынайы кешірім мен сабырлы сөйлесу көбіне ең дұрыс бастама болады."
-        ].join("\n");
-
-    }
-
-    if (
-        text.includes("рахмет") ||
-        text.includes("көмек")
-    ) {
-
-        return [
-            "Әрқашан көмектесуге дайынмын 🤍",
-            "",
-            "Егер нақты жағдайды немесе оның саған жазған хабарламасын жіберсең, сол контекстке сәйкес бірнеше жауап нұсқасын дайындауға болады."
-        ].join("\n");
-
-    }
-
-    return [
-        "Түсіндім.",
-        "",
-        "Бұл жағдайға нақты жауап беру үшін контекст маңызды.",
-        "",
-        "Маған мынаны жазып көр:",
-        "",
-        "• Ол саған нақты не жазды?",
-        "• Бұған дейін не туралы сөйлестіңдер?",
-        "• Сенің мақсатың қандай?",
-        "",
-        "Сонда мен саған бірнеше түрлі жауап нұсқасын ұсынамын:",
-        "1. Табиғи",
-        "2. Әзілмен",
-        "3. Салмақты",
-        "4. Жылы әрі жұмсақ"
-    ].join("\n");
-
-}
-
-/* =========================================================
-   ADD MESSAGE
-========================================================= */
-
-function addMessage(
-    text,
-    sender
-) {
-
-    const messages =
-        document.getElementById(
-            "messages"
-        );
-
-    const message =
-        document.createElement(
-            "div"
-        );
-
-    message.className =
-        `message ${sender}`;
-
-    const avatarIcon =
-        sender === "ai"
-            ? "bot"
-            : "user";
-
-    const actions =
-        sender === "ai"
-            ? `
-                <div class="message-actions">
-
-                    <button
-                        class="copy-button"
-                        type="button"
-                    >
-                        <i
-                            data-lucide="copy"
-                        ></i>
-
-                        Көшіру
-
-                    </button>
-
-                </div>
-            `
-            : "";
-
-    message.innerHTML = `
-
-        <div class="message-avatar">
-
-            <i
-                data-lucide="${avatarIcon}"
-            ></i>
-
-        </div>
-
-        <div class="message-content">
-
-            <div class="message-bubble">
-
-                ${escapeHTML(text)}
-
-            </div>
-
-            ${actions}
-
-        </div>
-
-    `;
-
-    messages.appendChild(
-        message
-    );
-
-    lucide.createIcons();
-
-    if (
-        sender === "ai"
-    ) {
-
-        const copyButton =
-            message.querySelector(
-                ".copy-button"
-            );
-
-        copyButton.addEventListener(
-            "click",
-            () => {
-
-                copyMessage(
-                    text,
-                    copyButton
-                );
-
-            }
-        );
-
-    }
-
-    saveMessage(
-        text,
-        sender
-    );
-
-    scrollChatToBottom();
-
-}
-
-/* =========================================================
-   COPY MESSAGE
-========================================================= */
-
-async function copyMessage(
-    text,
-    button
-) {
-
-    try {
-
-        await navigator
-            .clipboard
-            .writeText(
-                text
-            );
-
-        button.innerHTML = `
-
-            <i
-                data-lucide="check"
-            ></i>
-
-            Көшірілді
-
-        `;
-
-        lucide.createIcons();
-
-        setTimeout(
-            () => {
-
-                button.innerHTML = `
-
-                    <i
-                        data-lucide="copy"
-                    ></i>
-
-                    Көшіру
-
-                `;
-
-                lucide.createIcons();
-
-            },
-            1800
-        );
-
-    } catch (
-        error
-    ) {
-
-        console.error(
-            error
-        );
-
-    }
-
-}
-
-/* =========================================================
-   CLEAR CHAT
-========================================================= */
 
 function clearChat() {
-
-    const messages =
-        document.getElementById(
-            "messages"
-        );
-
-    const chatEmpty =
-        document.getElementById(
-            "chatEmpty"
-        );
-
-    messages.innerHTML =
-        "";
-
-    chatEmpty.classList.remove(
-        "hidden"
-    );
-
-    localStorage.removeItem(
-        "aruzhan_ai_history"
-    );
-
+    messagesList.innerHTML = "";
+    welcomeAI.style.display = "block";
 }
 
-/* =========================================================
-   LOCAL STORAGE
-========================================================= */
+function sendMessage() {
+    const text = messageInput.value.trim();
+    if (!text || sendBtn.disabled) return;
 
-function saveMessage(
-    text,
-    sender
-) {
+    welcomeAI.style.display = "none";
 
-    const history =
-        JSON.parse(
-            localStorage.getItem(
-                "aruzhan_ai_history"
-            ) || "[]"
-        );
+    // Add User Message
+    addMessage(text, "user");
+    messageInput.value = "";
+    autoResize(messageInput);
 
-    history.push({
-        text,
-        sender,
-        timestamp:
-            Date.now()
+    // Show Typing
+    typing.style.display = "flex";
+    chatBody.scrollTop = chatBody.scrollHeight;
+    sendBtn.disabled = true;
+
+    // Simulate Realistic Dynamic AI Logic
+    setTimeout(() => {
+        const response = generateSmartAIResponse(text);
+        typing.style.display = "none";
+        addMessage(response, "ai");
+        sendBtn.disabled = false;
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }, 1000 + Math.random() * 800);
+}
+
+function addMessage(text, sender) {
+    const msgDiv = document.createElement("div");
+    msgDiv.className = `real-message ${sender}`;
+
+    const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    let actionsHtml = sender === 'ai' ? `
+        <div class="msg-actions">
+            <button class="copy-btn" onclick="copyText(this)"><i data-lucide="copy"></i> Көшіру</button>
+        </div>
+    ` : '';
+
+    msgDiv.innerHTML = `
+        <div class="msg-avatar">${sender === 'ai' ? '<i data-lucide="bot"></i>' : '<i data-lucide="user"></i>'}</div>
+        <div class="msg-content">
+            <div class="msg-text">${escapeHtml(text)}</div>
+            ${actionsHtml}
+            <span class="msg-time">${timeStr}</span>
+        </div>
+    `;
+
+    messagesList.appendChild(msgDiv);
+    lucide.createIcons();
+    chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function copyText(btn) {
+    const text = btn.closest('.msg-content').querySelector('.msg-text').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML = `<i data-lucide="check"></i> Көшірілді!`;
+        lucide.createIcons();
+        setTimeout(() => {
+            btn.innerHTML = `<i data-lucide="copy"></i> Көшіру`;
+            lucide.createIcons();
+        }, 2000);
     });
+}
 
-    localStorage.setItem(
-        "aruzhan_ai_history",
-        JSON.stringify(
-            history.slice(-50)
-        )
-    );
-
+function escapeHtml(text) {
+    return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
 /* =========================================================
-   AUTO RESIZE
+   ADVANCED REALISTIC AI RESPONSE ENGINE
 ========================================================= */
+function generateSmartAIResponse(input) {
+    const lower = input.toLowerCase();
 
-function autoResize(
-    textarea
-) {
+    if (lower.includes("бірінші") || lower.includes("бастасам") || lower.includes("танысу")) {
+        return `Бірінші болып жазуда қарапайым әрі шынайы болған дұрыс. Төмендегі нұсқалардың бірін таңдасаң болады:\n\n` +
+               `1. 💡 **Жылы әрі табиғи:** «Сәлем! Сторисіңді/суретіңді көріп едім, өте әдемі шығыпты 😊 Бүгінгі күнің қалай өтіп жатыр?»\n` +
+               `2. 😊 **Аздап әзілмен:** «Сәлем! Менде саған бір маңызды сұрақ бар... Конфетті қай түрін жақсы көресің? 🍫»\n` +
+               `3. 🎯 **Ортақ тақырып:** «Сәлем! Сен де [музыка/фильм/хобби] ұнатады екенсің ғой, маған да бұл өте жақын!»`;
+    }
 
-    textarea.style.height =
-        "auto";
+    if (lower.includes("күнің қалай өтті") || lower.includes("не істеп")) {
+        return `Керемет! Ол саған ықылас білдіріп тұр. Жауапты тек «жақсы» деп қысқа қайырмай, диалогты әрі қарай жалғастыратындай етіп жаз:\n\n` +
+               `«Бүгінгі күн біраз қарбалас болды, бірақ кешкісін демалып жатырмын 😊 Өзіңде қалай? Күніңде бір қызық жаңалық болды ма?»`;
+    }
 
-    textarea.style.height =
-        Math.min(
-            textarea.scrollHeight,
-            120
-        ) + "px";
+    if (lower.includes("тоқтап қалды") || lower.includes("сұрақ")) {
+        return `Диалогты жандандыруға арналған 3 қызықты сұрақ:\n\n` +
+               `1. «Егер қазір кез келген мемлекетке ұшып кету мүмкіндігі болса, қайда барар едің? ✈️»\n` +
+               `2. «Сен кітап немесе фильм таңдағанда жанрға көп көңіл бөлесің бе, әлде көңіл-күйге байланысты ма? 🎬»\n` +
+               `3. «Демалысты үйде тыныш өткізген ұнай ма, әлде белсенді серуендеген бе?»`;
+    }
 
-}
+    if (lower.includes("көрерміз") || lower.includes("білмеймін") || lower.includes("астар")) {
+        return `🔍 **Мағынаны талдау:**\n\n` +
+               `«Көрерміз» сөзі әдетте қыздың бірден «иә» дегісі келмегенде немесе сіздің әрі қарайғы әрекетіңізді байқап көргісі келгенде айтылады. Бұл бас тарту емес!\n\n` +
+               `💡 **Не жазуға болады:**\n` +
+               `«Жақсы, онда бұл кішігірім тосынсый болып қала берсін 😉» деп жеңіл қабылдағаныңды көрсет.`;
+    }
 
-/* =========================================================
-   SCROLL
-========================================================= */
+    if (lower.includes("рахмет") || lower.includes("жақсы")) {
+        return `Оқасы жоқ! 🤍 Әрқашан көмектесуге дайынмын. Сәттілік тілеймін, бәрі тамаша болады! Тағы сұрағың болса, жаза бер.`;
+    }
 
-function scrollChatToBottom() {
-
-    const chatBody =
-        document.getElementById(
-            "chatBody"
-        );
-
-    requestAnimationFrame(
-        () => {
-
-            chatBody.scrollTop =
-                chatBody.scrollHeight;
-
-        }
-    );
-
-}
-
-/* =========================================================
-   HTML ESCAPE
-========================================================= */
-
-function escapeHTML(
-    value
-) {
-
-    return String(
-        value
-    )
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
+    // Default Intelligence Fallback
+    return `Түсіндім! Бұл жағдайда ең бастысы — сабырлы әрі табиғи болу. \n\n` +
+           `Сізге ұсыныс: Жауап жазғанда асықпай, оның көңіл-күйін ескеріңіз. Егер нақты хабарламаның мәтінін жіберсеңіз, мен саған дәл осы сәтке арналған 2-3 түрлі жауап дайындап беремін! 💡`;
 }
 </script>
-
 </body>
 </html>
