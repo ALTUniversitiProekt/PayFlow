@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Futuristic 3D Web Experience</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cyanGlow: '#00f0ff',
+            magentaGlow: '#ff007f',
+            goldGlow: '#ffb700',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Global Styles -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #030712;
+      color: #f3f4f6;
+      overflow-x: hidden;
+      user-select: none;
+    }
+    ::-webkit-scrollbar { display: none; }
+    * { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    .glass-panel {
+      background: rgba(10, 15, 30, 0.55);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+    }
+    .glow-cyan {
+      text-shadow: 0 0 12px rgba(0, 240, 255, 0.65), 0 0 24px rgba(0, 240, 255, 0.35);
+    }
+    .glow-magenta {
+      text-shadow: 0 0 12px rgba(255, 0, 127, 0.65), 0 0 24px rgba(255, 0, 127, 0.35);
+    }
+  </style>
+
+  <!-- React & ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  
+  <!-- Babel for JSX processing in single HTML -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Three.js & Fiber/Drei Dependencies -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+</head>
+<body class="bg-gray-950 text-white min-h-screen relative overflow-hidden">
+
+  <div id="root"></div>
+
+  <!-- React App Scripts -->
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    // --- MOCK DATA ---
+    const WORLDS = ['Ввод', 'О нас', 'Проекты', 'Технологии', 'Услуги', 'Контакты'];
+
+    const PROJECTS = [
+      { id: 1, name: "Nexus AI Mesh", cat: "Autonomous AI", desc: "Нейрондық торды визуализациялау жүйесі.", color: "#00f0ff" },
+      { id: 2, name: "Aetheria Engine", cat: "Spatial Web3", desc: "Браузерлік WebGL арқылы жұмыс істейтін 3D әлем.", color: "#ff007f" },
+      { id: 3, name: "QuantCAD Cloud", cat: "Volumetric CAD", desc: "Кванттық физиканы 3D модельдеу платформасы.", color: "#00ffaa" }
+    ];
+
+    const SERVICES = [
+      { title: "3D Web Design", desc: " Three.js және WebGL негізіндегі браузерлік интерактив сайттар." },
+      { title: "AI Integrations", desc: "Нейрондық желілер мен LLM жүйелерін визуализациялау." },
+      { title: "Futuristic UI/UX", desc: "Футуристік кибернетикалық интерфейстер мен микро-өзара әрекеттер." }
+    ];
+
+    // --- MAIN APP COMPONENT ---
+    function App() {
+      const [currentWorld, setCurrentWorld] = useState(0);
+      const [isExploring, setIsExploring] = useState(false);
+      const canvasRef = useRef(null);
+
+      // --- THREE.JS BACKGROUND SCENE ---
+      useEffect(() => {
+        const mount = canvasRef.current;
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x030712, 0.03);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        mount.appendChild(renderer.domElement);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        const pointLight = new THREE.PointLight(0x00f0ff, 2, 50);
+        pointLight.position.set(2, 3, 4);
+        scene.add(pointLight);
+
+        const pointLight2 = new THREE.PointLight(0xff007f, 2, 50);
+        pointLight2.position.set(-2, -3, -2);
+        scene.add(pointLight2);
+
+        // Central 3D Object (Procedural Knot)
+        const geometry = new THREE.TorusKnotGeometry(1, 0.3, 128, 32);
+        const material = new THREE.MeshPhysicalMaterial({
+          color: 0x00f0ff,
+          metalness: 0.1,
+          roughness: 0.1,
+          transmission: 0.9,
+          thickness: 1.2,
+          wireframe: true
+        });
+        const mainObject = new THREE.Mesh(geometry, material);
+        scene.add(mainObject);
+
+        // Floating Particles
+        const particleGeo = new THREE.BufferGeometry();
+        const count = 1000;
+        const posArray = new Float32Array(count * 3);
+        for(let i = 0; i < count * 3; i++) {
+          posArray[i] = (Math.random() - 0.5) * 20;
+        }
+        particleGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particleMat = new THREE.PointsMaterial({
+          size: 0.03,
+          color: 0xff007f,
+          transparent: true,
+          opacity: 0.6
+        });
+        const particles = new THREE.Points(particleGeo, particleMat);
+        scene.add(particles);
+
+        // Animation Loop
+        let animationFrameId;
+        const animate = () => {
+          animationFrameId = requestAnimationFrame(animate);
+          mainObject.rotation.x += 0.005;
+          mainObject.rotation.y += 0.01;
+          particles.rotation.y -= 0.001;
+
+          // Camera Movement based on selected World
+          gsap.to(camera.position, {
+            z: 5 - currentWorld * 0.5,
+            x: Math.sin(currentWorld) * 2,
+            duration: 1.5,
+            ease: "power2.out"
+          });
+
+          renderer.render(scene, camera);
+        };
+        animate();
+
+        // Window Resize
+        const handleResize = () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+        };
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+          window.removeEventListener('resize', handleResize);
+          cancelAnimationFrame(animationFrameId);
+          mount.removeChild(renderer.domElement);
+        };
+      }, [currentWorld]);
+
+      return (
+        <div className="relative w-full h-screen overflow-hidden select-none">
+          {/* 3D Canvas Background */}
+          <div ref={canvasRef} className="absolute inset-0 z-0 pointer-events-none" />
+
+          {/* HUD Navigation */}
+          <header className="absolute top-0 left-0 w-full p-6 flex justify-between items-center z-50 glass-panel border-b border-white/10">
+            <div className="text-xl font-extrabold tracking-widest glow-cyan">CYBER::WORLD</div>
+            <nav className="hidden md:flex space-x-6 text-sm">
+              {WORLDS.map((name, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => { setCurrentWorld(idx); setIsExploring(true); }}
+                  className={`transition-all duration-300 ${currentWorld === idx ? 'text-cyan-400 font-bold glow-cyan scale-110' : 'text-gray-400 hover:text-white'}`}
+                >
+                  {name}
+                </button>
+              ))}
+            </nav>
+            <button 
+              onClick={() => setIsExploring(!isExploring)}
+              className="px-4 py-2 text-xs font-bold uppercase tracking-wider border border-cyan-400/50 rounded-full hover:bg-cyan-400/20 transition-all glow-cyan"
+            >
+              {isExploring ? ' шолу режимі' : ' Зерттеу'}
+            </button>
+          </header>
+
+          {/* Content Overlays for Worlds */}
+          <main className="relative z-10 w-full h-full flex items-center justify-center p-8 pointer-events-none">
+            
+            {/* HERO WORLD */}
+            {currentWorld === 0 && (
+              <div className="text-center pointer-events-auto max-w-2xl">
+                <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-4 glow-cyan">
+                  БОЛАШАҚ 3D ӘЛЕМІ
+                </h1>
+                <p className="text-gray-300 text-lg mb-8">
+                  Өз ара әрекеттесуге арналған толыққанды веб-кеңістік. Үш өлшемді цифрлық инновациялар.
+                </p>
+                <button
+                  onClick={() => { setCurrentWorld(1); setIsExploring(true); }}
+                  className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg text-white font-bold tracking-wider hover:opacity-90 transition-all shadow-[0_0_30px_rgba(0,240,255,0.4)]"
+                >
+                  ӘЛЕМДІ ЗЕРТТЕУ →
+                </button>
+              </div>
+            )}
+
+            {/* ABOUT WORLD */}
+            {currentWorld === 1 && (
+              <div className="glass-panel p-8 rounded-2xl max-w-xl pointer-events-auto border border-cyan-500/30">
+                <h2 className="text-3xl font-bold mb-4 glow-magenta">БІЗ ТУРАЛЫ</h2>
+                <p className="text-gray-300 leading-relaxed mb-4">
+                  Біз браузер ішінде 3D визуализация, WebGL графикасы мен жасанды интелект интерфейстерін біріктіріп, қарапайым 2D сайттарды болашақтың цифрлық әлемдеріне айналдырамыз.
+                </p>
+                <div className="grid grid-cols-2 gap-4 mt-6 text-center">
+                  <div className="p-4 bg-white/5 rounded-lg border border-white/10">
+                    <div className="text-2xl font-bold text-cyan-400">100%</div>
+                    <div className="text-xs text-gray-400">Интерактивтілік</div>
+                  </div>
+                  <div className="p-4 bg-white/5 rounded-lg border border-white/10">
+                    <div className="text-2xl font-bold text-pink-500">60 FPS</div>
+                    <div className="text-xs text-gray-400">Жылдамдық</div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* PROJECTS WORLD */}
+            {currentWorld === 2 && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl w-full pointer-events-auto">
+                {PROJECTS.map((p) => (
+                  <div key={p.id} className="glass-panel p-6 rounded-xl hover:border-cyan-400/50 transition-all group">
+                    <span className="text-xs text-cyan-400 font-mono">{p.cat}</span>
+                    <h3 className="text-xl font-bold mt-1 group-hover:text-cyan-300 transition-colors">{p.name}</h3>
+                    <p className="text-sm text-gray-400 mt-2">{p.desc}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* SERVICES WORLD */}
+            {currentWorld === 4 && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl w-full pointer-events-auto">
+                {SERVICES.map((s, idx) => (
+                  <div key={idx} className="glass-panel p-6 rounded-xl border border-pink-500/20">
+                    <h3 className="text-xl font-bold text-pink-400 mb-2">{s.title}</h3>
+                    <p className="text-sm text-gray-300">{s.desc}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* CONTACT WORLD */}
+            {currentWorld === 5 && (
+              <div className="glass-panel p-8 rounded-2xl max-w-md w-full pointer-events-auto border border-cyan-400/30">
+                <h2 className="text-2xl font-bold mb-4 text-center glow-cyan">БАЙЛАНЫС ПОРТАЛЫ</h2>
+                <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+                  <input type="text" placeholder="Атыңыз" className="w-full p-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-cyan-400 text-sm" />
+                  <input type="email" placeholder="Email" className="w-full p-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-cyan-400 text-sm" />
+                  <textarea placeholder="Хабарламаңыз..." className="w-full p-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-cyan-400 text-sm h-24"></textarea>
+                  <button className="w-full py-3 bg-cyan-500 text-black font-bold rounded-lg hover:bg-cyan-400 transition-colors">ЖІБЕРУ</button>
+                </form>
+              </div>
+            )}
+          </main>
+
+          {/* Controls Footer */}
+          <footer className="absolute bottom-6 left-6 right-6 flex justify-between items-center z-50 text-xs text-gray-400 pointer-events-auto">
+            <div>Ағымдағы әлем: <span className="text-cyan-400 font-mono">{WORLDS[currentWorld]}</span></div>
+            <div className="flex space-x-2">
+              <button 
+                onClick={() => setCurrentWorld((prev) => (prev > 0 ? prev - 1 : WORLDS.length - 1))}
+                className="px-3 py-1 bg-white/10 rounded hover:bg-white/20"
+              >
+                ← Артқа
+              </button>
+              <button 
+                onClick={() => setCurrentWorld((prev) => (prev < WORLDS.length - 1 ? prev + 1 : 0))}
+                className="px-3 py-1 bg-white/10 rounded hover:bg-white/20"
+              >
+                Алға →
+              </button>
+            </div>
+          </footer>
+        </div>
+      );
+    }
+
+    // Render React Application
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
