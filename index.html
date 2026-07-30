@@ -3095,25 +3095,33 @@ async function getAIResponse(
     input
 ) {
 
-    /*
-        IMPORTANT:
+    async function getAIResponse(input) {
 
-        This is a local demo engine.
+    const response = await fetch(
+        "http://localhost:3000/api/chat",
+        {
+            method: "POST",
 
-        For a real AI:
-        replace this function with
-        a secure backend API request.
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-        NEVER put private API keys
-        directly inside frontend code.
-    */
-
-    return generateLocalResponse(
-        input
+            body: JSON.stringify({
+                message: input
+            })
+        }
     );
 
-}
+    if (!response.ok) {
+        throw new Error(
+            "Backend серверінен жауап алу мүмкін болмады"
+        );
+    }
 
+    const data = await response.json();
+
+    return data.reply;
+}
 /* =========================================================
    LOCAL AI ENGINE
 ========================================================= */
