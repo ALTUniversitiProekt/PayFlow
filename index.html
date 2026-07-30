@@ -11,7 +11,7 @@
 
 <style>
 /* =========================================================
-   ARUZHAN AI - ADVANCED ANIMATIONS & STYLING
+   ARUZHAN AI - COMPLETE & ADVANCED ANIMATION SYSTEM
 ========================================================= */
 :root {
     --bg: #06060a;
@@ -22,6 +22,7 @@
     --muted: #9494a3;
     --purple: #9b6cff;
     --pink: #ec4899;
+    --blue: #3b82f6;
     --gradient: linear-gradient(135deg, #8b5cf6, #ec4899);
     --gradient-glow: linear-gradient(135deg, rgba(139, 92, 246, 0.4), rgba(236, 72, 153, 0.4));
     --radius: 16px;
@@ -33,15 +34,31 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     min-height: 100vh;
     background: radial-gradient(circle at 10% 10%, rgba(139, 92, 246, 0.15), transparent 30%),
                 radial-gradient(circle at 90% 20%, rgba(236, 72, 153, 0.1), transparent 30%),
+                radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.05), transparent 40%),
                 var(--bg);
     color: var(--text);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     overflow-x: hidden;
     line-height: 1.5;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
 }
 
 /* FIREWORKS CANVAS */
@@ -83,16 +100,18 @@ body {
 .logo-icon {
     width: 42px;
     height: 42px;
-    border-radius: 12px;
-    background: var(--gradient);
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 12px;
+    background: var(--gradient);
     box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+    color: white;
 }
 
 .logo-text strong {
     font-size: 15px;
+    letter-spacing: 0.5px;
     display: block;
 }
 
@@ -111,41 +130,214 @@ body {
     color: var(--muted);
     text-decoration: none;
     font-size: 13px;
+    font-weight: 500;
     transition: 0.2s;
 }
 
-.nav-links a:hover { color: white; }
+.nav-links a:hover {
+    color: white;
+}
 
-/* HERO */
+.nav-button {
+    padding: 10px 20px;
+    border: 1px solid var(--border-accent);
+    border-radius: 10px;
+    background: rgba(155, 108, 255, 0.1);
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+
+.nav-button:hover {
+    background: rgba(155, 108, 255, 0.25);
+    box-shadow: 0 0 15px rgba(155, 108, 255, 0.3);
+}
+
+/* HERO SECTION */
 .hero {
-    padding: 140px 6% 40px;
-    text-align: center;
+    min-height: 85vh;
+    padding: 140px 6% 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border: 1px solid var(--border-accent);
+    border-radius: 50px;
+    background: rgba(155, 108, 255, 0.08);
+    color: #c4aaff;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--pink);
+    box-shadow: 0 0 10px var(--pink);
 }
 
 .hero h1 {
-    font-size: clamp(36px, 5vw, 64px);
+    max-width: 900px;
+    font-size: clamp(38px, 6vw, 72px);
+    line-height: 1.1;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
     background: linear-gradient(135deg, #ffffff 30%, #c4b5fd 70%, #f9a8d4 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 16px;
 }
 
 .hero p {
+    max-width: 620px;
     color: var(--muted);
-    max-width: 600px;
-    font-size: 15px;
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 36px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.primary-button {
+    padding: 14px 28px;
+    border-radius: 12px;
+    background: var(--gradient);
+    color: white;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+}
+
+.primary-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(139, 92, 246, 0.45);
+}
+
+.secondary-button {
+    padding: 14px 28px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.secondary-button:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* FEATURES SECTION */
+.section {
+    padding: 100px 6%;
+}
+
+.section-header {
+    max-width: 650px;
+    margin: 0 auto 60px;
+    text-align: center;
+}
+
+.section-label {
+    color: var(--purple);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.section-header h2 {
+    font-size: clamp(28px, 4vw, 42px);
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+}
+
+.features {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.feature {
+    position: relative;
+    padding: 30px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.02);
+    transition: 0.3s;
+    overflow: hidden;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+    border-color: rgba(139, 92, 246, 0.3);
+    background: rgba(139, 92, 246, 0.04);
+}
+
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(139, 92, 246, 0.1);
+    color: var(--purple);
+    margin-bottom: 20px;
+}
+
+.feature h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.feature p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
 }
 
 /* REAL AI CHAT APP */
 .ai-section {
-    padding: 30px 6% 80px;
+    padding: 60px 6% 100px;
 }
 
 .ai-container {
-    max-width: 950px;
+    max-width: 1000px;
     margin: auto;
     border-radius: 24px;
     background: var(--gradient-glow);
@@ -172,7 +364,7 @@ body {
     background: rgba(13, 13, 20, 0.9);
 }
 
-/* 🤖 ANIMATED AI BOT AVATAR */
+/* 🤖 ANIMATED BOT SMILEY AVATAR */
 .ai-avatar-box {
     position: relative;
     width: 48px;
@@ -203,14 +395,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: floatBot 4s infinite ease-in-out;
+    animation: floatBot 3.5s infinite ease-in-out;
     box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
 }
 
-/* Animated Robot Face Inside Avatar */
+/* Animated Interactive Smiley Face */
 .bot-face {
     width: 26px;
-    height: 20px;
+    height: 22px;
     background: #0d0c15;
     border-radius: 6px;
     display: flex;
@@ -237,7 +429,7 @@ body {
 
 .bot-smile {
     width: 10px;
-    height: 3px;
+    height: 4px;
     border-bottom: 2px solid #9b6cff;
     border-radius: 50%;
     transition: 0.3s;
@@ -245,12 +437,12 @@ body {
 
 @keyframes floatBot {
     0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-4px) rotate(3deg); }
+    50% { transform: translateY(-5px) rotate(4deg); }
 }
 
 @keyframes pulseGlow {
     0%, 100% { transform: scale(0.95); opacity: 0.4; }
-    50% { transform: scale(1.15); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 0.8; }
 }
 
 @keyframes blinkEye {
@@ -289,6 +481,9 @@ body {
     font-size: 11px;
     cursor: pointer;
     transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 .control-btn:hover { color: white; background: rgba(255, 255, 255, 0.1); }
 
@@ -307,8 +502,8 @@ body {
     max-width: 550px;
 }
 
-.welcome-ai h2 { font-size: 24px; margin-bottom: 8px; }
-.welcome-ai p { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
+.welcome-ai h2 { font-size: 24px; margin-bottom: 10px; }
+.welcome-ai p { color: var(--muted); font-size: 13px; margin-bottom: 24px; }
 
 .quick-buttons {
     display: grid;
@@ -394,6 +589,7 @@ body {
     align-items: center;
     gap: 4px;
     margin-top: 4px;
+    transition: 0.2s;
 }
 .copy-btn:hover { color: white; }
 
@@ -468,6 +664,7 @@ body {
     transition: 0.2s;
     position: relative;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .send-btn:hover {
@@ -481,8 +678,8 @@ body {
 
 @keyframes rocketFly {
     0% { transform: translate(0, 0) scale(1); opacity: 1; }
-    50% { transform: translate(20px, -20px) scale(1.2); opacity: 0.8; }
-    51% { transform: translate(-20px, 20px) scale(0.5); opacity: 0; }
+    50% { transform: translate(25px, -25px) scale(1.3); opacity: 0.8; }
+    51% { transform: translate(-25px, 25px) scale(0.5); opacity: 0; }
     100% { transform: translate(0, 0) scale(1); opacity: 1; }
 }
 
@@ -493,26 +690,64 @@ body {
 
 /* THANK YOU SECTION */
 .thanks-section {
-    padding: 60px 6% 100px;
-    text-align: center;
+    padding: 80px 6% 120px;
 }
 
 .thanks-card {
-    max-width: 750px;
+    max-width: 850px;
     margin: auto;
-    padding: 50px 30px;
-    border-radius: 24px;
+    padding: 60px 40px;
+    text-align: center;
     border: 1px solid rgba(236, 72, 153, 0.2);
-    background: rgba(255, 255, 255, 0.015);
+    border-radius: 28px;
+    background: radial-gradient(circle at 50% 0%, rgba(236, 72, 153, 0.12), transparent 60%), rgba(255, 255, 255, 0.015);
 }
 
+.heart-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 20px;
+    color: var(--pink);
+}
+
+.thanks-card h2 {
+    font-size: 32px;
+    margin-bottom: 16px;
+}
+
+.thanks-card p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 680px;
+    margin: 0 auto 16px;
+}
+
+.special-thanks {
+    margin-top: 30px !important;
+    color: #f3d5e7 !important;
+    font-size: 16px !important;
+    font-weight: 600;
+}
+
+/* FOOTER */
 footer {
-    padding: 24px 6%;
+    padding: 30px 6%;
     border-top: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
+    align-items: center;
     color: var(--muted);
     font-size: 11px;
+}
+
+@media(max-width: 768px) {
+    .nav-links { display: none; }
+    .quick-buttons { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 36px; }
+    .real-message { max-width: 90%; }
+    .ai-chat { height: 600px; }
+    .thanks-card { padding: 40px 20px; }
 }
 </style>
 </head>
@@ -532,24 +767,75 @@ footer {
     </a>
     <div class="nav-links">
         <a href="#home">Басты бет</a>
+        <a href="#features">Мүмкіндіктер</a>
         <a href="#ai">AI Ассистент</a>
         <a href="#thanks">Алғыс</a>
     </div>
+    <a href="#ai" class="nav-button"><i data-lucide="sparkles"></i> AI-мен сөйлесу</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="home">
-    <h1>ARUZHAN AI 2.0</h1>
-    <p>Қарым-қатынастағы кез келген сурақтарға жауап беретін ақылды интерактивті AI көмекшісі</p>
+    <div class="badge">
+        <span class="badge-dot"></span>
+        ARUZHAN AI v2.0 — ШЫНАЙЫ ҚАРЫМ-ҚАТЫНАС КӨМЕКШІСІ
+    </div>
+    <h1>Қызбен сөйлесуде тартынып жүрсің бе?</h1>
+    <p>ARUZHAN AI — диалогты табиғи жүргізуге, алғашқы хабарламаны әдемі бастауға және кез келген диалогты қызықты етуге арналған ақылды интеллект.</p>
+    <div class="hero-buttons">
+        <a href="#ai" class="primary-button"><i data-lucide="message-square"></i> Ассистентті іске қосу</a>
+        <a href="#features" class="secondary-button"><i data-lucide="compass"></i> Мүмкіндіктерді көру</a>
+    </div>
 </section>
 
-<!-- AI CHAT SECTION -->
+<!-- FEATURES -->
+<section class="section" id="features">
+    <div class="section-header">
+        <div class="section-label">НЕЛІКТЕН ARUZHAN AI?</div>
+        <h2>Тіл табысу енді өте оңай</h2>
+        <p>AI көмекші сіздің жағдайыңызды терең түсініп, ең орынды әрі әдемі жауап нұсқаларын дайындайды.</p>
+    </div>
+    <div class="features">
+        <div class="feature">
+            <div class="feature-icon"><i data-lucide="message-circle"></i></div>
+            <h3>Әңгіме бастау</h3>
+            <p>Танысуды немесе диалогты тартымды әрі ерекше бастауға арналған ақылды идеялар.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon"><i data-lucide="heart"></i></div>
+            <h3>Жылы жауап қайтару</h3>
+            <p>Құрғақ мәтіндерді сезімге толы, табиғи әрі әдемі етіп өзгерту.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon"><i data-lucide="help-circle"></i></div>
+            <h3>Мағынасын талдау</h3>
+            <p>Қыздың жазған хабарламасының астарын, көңіл-күйін және шынайы ойын түсіну.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon"><i data-lucide="layers"></i></div>
+            <h3>Вариативтілік</h3>
+            <p>Бір жағдайға 3 түрлі стилде жауап: әзілмен, салмақты немесе романтикалық.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon"><i data-lucide="zap"></i></div>
+            <h3>Тығырықтан шығу</h3>
+            <p>Әңгіме тоқтап қалғанда диалогты жандандыратын ақылды сұрақтар генерациясы.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon"><i data-lucide="shield-check"></i></div>
+            <h3>Этика және Сыйластық</h3>
+            <p>Тек шынайы, сыпайы және адамгершілікке негізделген кеңестер.</p>
+        </div>
+    </div>
+</section>
+
+<!-- REAL AI CHAT APP -->
 <section class="ai-section" id="ai">
     <div class="ai-container">
         <div class="ai-chat">
             <div class="ai-top">
                 <div class="ai-profile">
-                    <!-- 🤖 ANIMATED BOT AVATAR -->
+                    <!-- 🤖 ANIMATED INTERACTIVE SMILEY BOT AVATAR -->
                     <div class="ai-avatar-box">
                         <div class="ai-avatar-glow"></div>
                         <div class="ai-avatar-body">
@@ -567,25 +853,27 @@ footer {
                         <p>Белсенді — Жауап беруге дайын</p>
                     </div>
                 </div>
-                <button class="control-btn" onclick="clearChat()"><i data-lucide="trash-2"></i> Тазалау</button>
+                <div class="chat-controls">
+                    <button class="control-btn" onclick="clearChat()"><i data-lucide="trash-2"></i> Тазалау</button>
+                </div>
             </div>
 
             <div class="chat-body" id="chatBody">
                 <div class="welcome-ai" id="welcomeAI">
                     <h2>Сәлем! Men Aruzhan AI-мын 🤍</h2>
-                    <p>Маған кез келген сұрағыңды қой! Мен саған ең орынды әрі ақылды жауап дайындаймын.</p>
+                    <p>Қандай жағдай болып жатыр? Төмендегі дайын түймелердің бірін басыңыз немесе өз жағдайыңызды жазыңыз.</p>
                     <div class="quick-buttons">
-                        <button class="quick-button" onclick="quickQuestion('Қызға бірінші болып не жазсам болады?')">
+                        <button class="quick-button" onclick="quickQuestion('Қызбен танысуды қалай ерекше бастасам болады?')">
                             <i data-lucide="sparkles"></i> Бірінші болып не жазамын?
                         </button>
-                        <button class="quick-button" onclick="quickQuestion('Ол маған ренжіп қалды. Қалай татулассам болады?')">
-                            <i data-lucide="heart-handshake"></i> Татуласу жолы
+                        <button class="quick-button" onclick="quickQuestion('Ол маған: «Күнің қалай өтті?» деп жазды. Не деп жауап берейін?')">
+                            <i data-lucide="message-square"></i> Жауап дайындау
                         </button>
-                        <button class="quick-button" onclick="quickQuestion('Әңгіме тоқтап қалмауы үшін қандай тақырыптар қозғаған дұрыс?')">
-                            <i data-lucide="message-circle"></i> Қызықты тақырыптар
+                        <button class="quick-button" onclick="quickQuestion('Әңгіме тоқтап қалды. Диалогты жалғастыруға 3 қызықты сұрақ берші.')">
+                            <i data-lucide="help-circle"></i> Әңгімені жандандыру
                         </button>
-                        <button class="quick-button" onclick="quickQuestion('Оның маған деген шынайы сезімін қалай білуге болады?')">
-                            <i data-lucide="search"></i> Сезімді түсіну
+                        <button class="quick-button" onclick="quickQuestion('Ол маған: «Көрерміз...» деп жазды. Бұл нені білдіреді?')">
+                            <i data-lucide="search"></i> Астарлы мағынасын түсіну
                         </button>
                     </div>
                 </div>
@@ -601,9 +889,9 @@ footer {
 
             <div class="chat-input-area">
                 <div class="chat-input-wrapper">
-                    <textarea id="messageInput" placeholder="Сұрағыңызды немесе жағдайыңызды жазыңыз..." rows="1" onkeydown="handleEnter(event)" oninput="autoResize(this)"></textarea>
+                    <textarea id="messageInput" placeholder="Жағдайыңызды немесе оның сөзін жазыңыз..." rows="1" onkeydown="handleEnter(event)" oninput="autoResize(this)"></textarea>
                     
-                    <!-- ROCKET BUTTON -->
+                    <!-- ROCKET FLYING BUTTON -->
                     <button class="send-btn" id="sendBtn" onclick="sendMessage()">
                         <div class="rocket-icon"><i data-lucide="rocket"></i></div>
                     </button>
@@ -616,16 +904,21 @@ footer {
 <!-- THANK YOU -->
 <section class="thanks-section" id="thanks">
     <div class="thanks-card">
-        <h2>Аружанға арнайы алғыс! 🤍</h2>
-        <p>Бұл жобаның шабыттандырушысы болғаның үшін рақмет!</p>
+        <i data-lucide="heart" class="heart-icon"></i>
+        <div class="section-label">SPECIAL THANKS</div>
+        <h2>Жобаның Шығу Тарихы</h2>
+        <p>ARUZHAN AI — адамдар арасындағы қарым-қатынасты жақсартуға, сезімдерді дұрыс жеткізуге және диалог құрудағы сенімсіздікті жоюға арналған жеке жоба.</p>
+        <p class="special-thanks">Аружанға арнайы алғысымызды білдіреміз! 🤍<br><br>Аружан, осы жобаның пайда болуына шабыт бергенің және қолдау көрсеткенің үшін үлкен рақмет!</p>
     </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-    <span>© 2026 ARUZHAN AI — Барлық құқықтар қорғалған.</span>
+    <span>© 2026 <strong>ARUZHAN AI</strong> — Барлық құқықтар қорғалған.</span>
+    <span>Powered by Advanced Dialogue Engine</span>
 </footer>
 
-<!-- JAVASCRIPT: LOGIC + ROCKET + FIREWORKS -->
+<!-- JAVASCRIPT: LOGIC + ROCKET + FULL-SCREEN FIREWORKS -->
 <script>
 lucide.createIcons();
 
@@ -663,41 +956,43 @@ function sendMessage() {
     const text = messageInput.value.trim();
     if (!text || sendBtn.disabled) return;
 
-    // 🚀 ROCKET ANIMATION
+    // 🚀 ROCKET ANIMATION TRIGGER
     sendBtn.classList.add("launching");
     setTimeout(() => sendBtn.classList.remove("launching"), 600);
 
-    // 🎆 FIREWORKS TRIGGER
+    // 🎆 FULL SCREEN FIREWORKS BURST
     createFireworksBurst();
 
     welcomeAI.style.display = "none";
 
-    // User Message
+    // Add User Message
     addMessage(text, "user");
     messageInput.value = "";
     autoResize(messageInput);
 
-    // Typing Status
+    // Show Typing Indicator
     typing.style.display = "flex";
     chatBody.scrollTop = chatBody.scrollHeight;
     sendBtn.disabled = true;
 
-    // AI Response Delay
+    // Simulate Dynamic AI Response
     setTimeout(() => {
         const response = generateSmartAIResponse(text);
         typing.style.display = "none";
         addMessage(response, "ai");
         sendBtn.disabled = false;
         chatBody.scrollTop = chatBody.scrollHeight;
-    }, 1200);
+    }, 1200 + Math.random() * 600);
 }
 
 function addMessage(text, sender) {
     const msgDiv = document.createElement("div");
     msgDiv.className = `real-message ${sender}`;
 
-    const actionsHtml = sender === 'ai' ? `
-        <button class="copy-btn" onclick="copyText(this)"><i data-lucide="copy"></i> Көшіру</button>
+    let actionsHtml = sender === 'ai' ? `
+        <div class="msg-actions">
+            <button class="copy-btn" onclick="copyText(this)"><i data-lucide="copy"></i> Көшіру</button>
+        </div>
     ` : '';
 
     msgDiv.innerHTML = `
@@ -730,40 +1025,49 @@ function escapeHtml(text) {
 }
 
 /* =========================================================
-   🧠 AI RESPONSE ENGINE WITH UNLIMITED QUESTIONS
+   🧠 DYNAMIC REALISTIC AI RESPONSE ENGINE
 ========================================================= */
 function generateSmartAIResponse(input) {
     const lower = input.toLowerCase();
 
-    if (lower.includes("бірінші") || lower.includes("танысу") || lower.includes("жазсам")) {
-        return `Бірінші хабарлама тым ресми болмауы керек. Мына ақылды нұсқаларды байқап көр:\n\n` +
-               `1. 💡 **Сториске реакция:** «Сәлем! Мына фото/орын өте адемі екен 😍 Қай жерде түсірілген?»\n` +
-               `2. 😊 **Аздап әзілмен:** «Сәлем! Жұмыс/оқу күнің сәтті өтіп жатыр ма, әлде тезірек демалыс келсін деп отырсың ба? 😅»\n` +
-               `3. 🎯 **Қарапайым әрі сыпайы:** «Сәлем! Көңіл-күйің қалай? Бүгінгі күніңе кішкене болсын қуаныш тілейін деп жазған едім ✨»`;
+    if (lower.includes("бірінші") || lower.includes("бастасам") || lower.includes("танысу") || lower.includes("жазсам")) {
+        return `Бірінші болып жазуда қарапайым әрі шынайы болған дұрыс. Төмендегі нұсқалардың бірін таңдасаң болады:\n\n` +
+               `1. 💡 **Жылы әрі табиғи:** «Сәлем! Сторисіңді/суретіңді көріп едім, өте әдемі шығыпты 😊 Бүгінгі күнің қалай өтіп жатыр?»\n` +
+               `2. 😊 **Аздап әзілмен:** «Сәлем! Менде саған бір маңызды сұрақ бар... Конфетті қай түрін жақсы көргісі келеді? 🍫»\n` +
+               `3. 🎯 **Ортақ тақырып:** «Сәлем! Сен де [музыка/фильм/хобби] ұнатады екенсің ғой, маған да бұл өте жақын!»`;
     }
 
-    if (lower.includes("ренжіп") || lower.includes("татуласу") || lower.includes("ренж")) {
+    if (lower.includes("күнің қалай өтті") || lower.includes("не істеп")) {
+        return `Керемет! Ол саған ықылас білдіріп тұр. Жауапты тек «жақсы» деп қысқа қайырмай, диалогты әрі қарай жалғастыратындай етіп жаз:\n\n` +
+               `«Бүгінгі күн біраз қарбалас болды, бірақ кешкісін демалып жатырмын 😊 Өзіңде қалай? Күніңде бір қызық жаңалық болды ма?»`;
+    }
+
+    if (lower.includes("тоқтап қалды") || lower.includes("сұрақ") || lower.includes("тақырып")) {
+        return `Диалогты жандандыруға арналған 3 қызықты сұрақ:\n\n` +
+               `1. «Егер қазір кез келген мемлекетке ұшып кету мүмкіндігі болса, қайда барар едің? ✈️»\n` +
+               `2. «Сен кітап немесе фильм таңдағанда жанрға көп көңіл бөлесің бе, әлде көңіл-күйге байланысты ма? 🎬»\n` +
+               `3. «Демалысты үйде тыныш өткізген ұнай ма, әлде белсенді серуендеген бе?»`;
+    }
+
+    if (lower.includes("көрерміз") || lower.includes("білмеймін") || lower.includes("астар")) {
+        return `🔍 **Мағынаны талдау:**\n\n` +
+               `«Көрерміз» сөзі әдетте қыздың бірден «иә» дегісі келмегенде немесе сіздің әрі қарайғы әрекетіңізді байқап көргісі келгенде айтылады. Бұл бас тарту емес!\n\n` +
+               `💡 **Не жазуға болады:**\n` +
+               `«Жақсы, онда бұл кішігірім тосынсый болып қала берсін 😉» деп жеңіл қабылдағаныңды көрсет.`;
+    }
+
+    if (lower.includes("ренжіп") || lower.includes("татуласу")) {
         return `Ренжіп қалғанда ең бастысы — өзіңді ақтамай, оның сезімін түсіну. Төмендегідей жазсаң болады:\n\n` +
                `«Сәлем... Саған реніш сыйлағаныма өкінемін. Сенің көңіл-күйің мен үшін өте маңызды. Қашан сөйлесуге дайын боласың, сонда асықпай сөйлесейікші, жарай ма? 🤍»`;
     }
 
-    if (lower.includes("тақырып") || lower.includes("сөйлесу") || lower.includes("әңгіме")) {
-        return `Қыздарға ұнайтын және диалогты жандандыратын ең жақсы 3 тақырып:\n\n` +
-               `1. 🎬 **Фильмдер мен саяхат:** Ең ұмытылмас саяхаты немесе қайта-қайта көре беретін фильмі туралы сұра.\n` +
-               `2. 🍕 **Асхана мен хобби:** Бос уақытында немен айналысқанды жақсы көргісі келеді?\n` +
-               `3. 🔮 **Балалық шақ пен армандар:** Күлкілі балалық шақ естеліктерін бөлісу араны жақындатады!`;
+    if (lower.includes("рахмет") || lower.includes("жақсы")) {
+        return `Оқасы жоқ! 🤍 Әрқашан көмектесуге дайынмын. Сәттілік тілеймін, бәрі тамаша болады! Тағы сұрағың болса, жаза бер.`;
     }
 
-    if (lower.includes("сезім") || lower.includes("ұната ма") || lower.includes("байқау")) {
-        return `🔍 **Қыздың сізге бейжай қарамайтынын білдіретін белгілер:**\n\n` +
-               `1. Хабарламаңызға тез әрі толық жауап қайтарады.\n` +
-               `2. Өзі де сұрақ қойып, диалогты жалғастыруға тырысады.\n` +
-               `3. Сіздің ұсақ-түйек әңгімелеріңіз бен ерекшеліктеріңізді есте сақтап қалады.`;
-    }
-
-    return `Бұл өте қызықты сұрақ! 🤔\n\n` +
-           `Сұрағыңызға байланысты кеңесім: Қарым-қатынаста ең бастысы — шынайылық пен сыйластық. Егер оған өз сезімдеріңіз бен ойыңызды ашық әрі асықпай жеткізсеңіз, ол міндетті түрде бағалайды. \n\n` +
-           `Тағы қандай да бір қосымша сұрағыңыз бар ма? Жаза беріңіз! ✨`;
+    // Default Intelligence Fallback
+    return `Түсіндім! Бұл жағдайда ең бастысы — сабырлы әрі табиғи болу. \n\n` +
+           `Сізге ұсыныс: Жауап жазғанда асықпай, оның көңіл-күйін ескеріңіз. Егер нақты хабарламаның мәтінін жіберсеңіз, мен саған дәл осы сәтке арналған 2-3 түрлі жауап дайындап беремін! 💡`;
 }
 
 /* =========================================================
@@ -785,16 +1089,16 @@ class Particle {
         this.x = x;
         this.y = y;
         this.color = color;
-        this.radius = Math.random() * 3 + 1.5;
-        this.speedX = (Math.random() - 0.5) * 8;
-        this.speedY = (Math.random() - 0.5) * 8;
+        this.radius = Math.random() * 3.5 + 1.5;
+        this.speedX = (Math.random() - 0.5) * 10;
+        this.speedY = (Math.random() - 0.5) * 10;
         this.alpha = 1;
         this.decay = Math.random() * 0.02 + 0.015;
     }
     update() {
         this.x += this.speedX;
         this.y += this.speedY;
-        this.speedY += 0.1; // gravity
+        this.speedY += 0.08; // realistic gravity effect
         this.alpha -= this.decay;
     }
     draw() {
@@ -803,6 +1107,8 @@ class Particle {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx.fillStyle = this.color;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = this.color;
         ctx.fill();
         ctx.restore();
     }
@@ -815,7 +1121,7 @@ function createFireworksBurst() {
 
     const colors = ["#ec4899", "#9b6cff", "#3b82f6", "#f59e0b", "#10b981", "#ffffff"];
 
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 50; i++) {
         const color = colors[Math.floor(Math.random() * colors.length)];
         particles.push(new Particle(startX, startY, color));
     }
